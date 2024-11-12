@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Decor Vista Admin</title>
+        <style>
+            /* Center form and set max width */
+            #formCategories {
+                max-width: 900px;
+                margin: 20px auto;
+                padding: 15px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f5f5f5;
+            }
+
+            /* Style for labels */
+            #formCategories h\\:outputLabel {
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 5px;
+                display: inline-block;
+            }
+
+            /* Style for input fields */
+            #formCategories h\\:inputText {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            /* Error messages in red with small font */
+            #formCategories h\\:message {
+                color: red;
+                font-size: 12px;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+
+            /* Buttons styling */
+            #formCategories h\\:panelGroup {
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            #formCategories h\\:commandButton {
+                padding: 8px 16px;
+                margin: 5px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                font-weight: 600;
+                color: #fff;
+            }
+
+            /* Button colors */
+            #formCategories h\\:commandButton[value="Add"] {
+                background-color: #007bff;
+            }
+
+            #formCategories h\\:commandButton[value="Reset"] {
+                background-color: #6c757d;
+            }
+
+            /* Hover effect for buttons */
+            #formCategories h\\:commandButton:hover {
+                opacity: 0.9;
+            }
+            .success {
+                background-color: #d4edda; /* Nền màu xanh nhạt */
+                color: #155724; /* Màu chữ xanh đậm */
+                border: 1px solid #c3e6cb; /* Đường viền xanh nhạt */
+                border-radius: 5px; /* Bo góc */
+                padding: 10px 15px; /* Khoảng cách bên trong */
+                margin: 15px 0; /* Khoảng cách bên ngoài */
+                font-size: 16px; /* Kích thước chữ */
+                display: flex; /* Sử dụng flexbox để căn chỉnh nội dung */
+                align-items: center; /* Căn giữa nội dung theo chiều dọc */
+            }
+
+            .success:before {
+                content: '✅'; /* Thêm biểu tượng thành công */
+                margin-right: 10px; /* Khoảng cách giữa biểu tượng và nội dung */
+                font-size: 20px; /* Kích thước biểu tượng */
+            }
+        </style>
+    </h:head>
+
+
+    <h:body class="sb-nav-fixed">
+        <div id="top">
+            <ui:insert name="header">
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+        </div>
+        <div id="layoutSidenav">
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Categories Management</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Categories Management</li>
+                        </ol>
+                        <h:form id="formCategories">
+                            <h4>Category Management</h4>
+                            <h:panelGrid columns="1" cellpadding="5">
+
+                                <h6 style="color: green;">The Category ID is generated automatically. Please enter a number between 1 and 5 to generate the ID.</h6>
+
+                                <h:outputLabel for="categoryID" value="Category ID" />
+                                <h:inputText id="categoryID" value="#{categoryMB.category.categoryID}" 
+                                             style="width: 800px; height: 40px"
+                                             requiredMessage="Category ID is required." />
+                                <h:message for="categoryName" style="color: red;" />
+                                <!-- Category Name (Bắt buộc nhập) -->
+                                <h:outputLabel for="categoryName" value="Category Name" />
+                                <h:inputText id="categoryName" value="#{categoryMB.category.categoryName}" 
+                                             style="width: 800px; height: 40px" required="true" 
+                                             requiredMessage="Category Name is required." />
+                                <h:message for="categoryName" style="color: red;" />
+
+                                <!-- Description (Tùy chọn) -->
+                                <h:outputLabel for="description" value="Description" />
+                                <h:inputText id="description" value="#{categoryMB.category.description}" 
+                                             style="width: 800px; height: 40px" />
+                                <h:message for="description" />
+
+                                <!-- Nút thao tác -->
+                                <h:panelGroup>
+                                    <!-- Nút Add -->
+                                    <h:commandButton action="#{categoryMB.addCategory}" value="Add" />
+
+                                    <!-- Nút Update -->
+                                    <h:commandButton action="#{categoryMB.updateCategory}" value="Update" />
+
+                                    <!-- Nút Reset -->
+                                    <h:commandButton action="#{categoryMB.resetForm}" value="Reset" type="button" />
+                                </h:panelGroup>
+                            </h:panelGrid>
+                        </h:form>
+                        <h:messages globalOnly="true" styleClass="success" />
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Category Table
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Category ID</th>
+                                            <th>Category Name</th>
+                                            <th>Description</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Category ID</th>
+                                            <th>Category Name</th>
+                                            <th>Description</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <c:forEach items="#{categoryMB.showAllCategories()}" var="item1">
+                                            <tr>
+                                                <td><h:outputText value="#{item1.categoryID}" /></td>
+                                                <td><h:outputText value="#{item1.categoryName}" /></td>
+                                                <td><h:outputText value="#{item1.description}" /></td>
+                                                <td>
+                                                    <h:form>
+                                                        <h:commandButton image="resources/image/e.png" action="#{categoryMB.findCategoryByID(item1.categoryID)}" style="width: 30px" type="submit" />
+                                                    </h:form>
+                                                </td>
+                                                <td>
+                                                    <h:form>
+                                                        <h:commandButton image="resources/image/delete.png" action="#{categoryMB.deleteCategories(item1.categoryID)}" style="width: 30px" type="submit"  onclick="return confirm('Are you sure you want to delete this category?');" />
+                                                    </h:form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+            </div>
+        </div>
+        <script src="resources/assets/demo/chart-bar-demo.js"/>
+        <script src="resources/assets/demo/chart-area-demo.js"/>
+        <script src="resources/js/scripts.js"/>
+        <script src="resources/js/datatablesSimple.js"/>
+    </h:body>
+</html>

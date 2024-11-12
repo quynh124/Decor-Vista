@@ -1,0 +1,429 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      >
+
+    <h:head>
+        <title>Decor Vista - Designer Details</title>
+        <h:outputStylesheet name="styles.css" />
+        <style>
+            :root {
+                --primary-gold: #FFD700;
+                --dark-gold: #B8860B;
+                --black: #1A1A1A;
+                --white: #FFFFFF;
+                --light-gray: #F5F5F5;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Arial', sans-serif;
+            }
+
+            body {
+                background-color: var(--white);
+                color: var(--black);
+            }
+
+            .page-title {
+                background-color: var(--black);
+                color: var(--white);
+                padding: 60px 0;
+                text-align: center;
+                position: relative;
+            }
+
+            .page-title::after {
+                content: '';
+                position: absolute;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 100px;
+                height: 3px;
+                background-color: var(--primary-gold);
+            }
+
+            .page-title h2 {
+                font-size: 2.5em;
+                margin-bottom: 15px;
+                color: var(--primary-gold);
+            }
+
+            .page-breadcrumb {
+                list-style: none;
+                display: flex;
+                justify-content: center;
+                gap: 10px;
+            }
+
+            .page-breadcrumb li a {
+                color: var(--primary-gold);
+                text-decoration: none;
+            }
+
+            .shop-single-section {
+                padding: 50px 0;
+            }
+
+            .auto-container {
+                max-width: 1200px;
+                margin: 0 auto;
+                padding: 0 20px;
+            }
+
+            .basic-details {
+                background: var(--white);
+                border-radius: 10px;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+                padding: 30px;
+            }
+
+            .image-box img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+
+            .info-column {
+                padding: 20px;
+            }
+
+            .info-column h4 {
+                color: var(--black);
+                font-size: 24px;
+                margin-bottom: 20px;
+                border-bottom: 2px solid var(--primary-gold);
+                padding-bottom: 10px;
+            }
+
+            .info {
+                margin: 15px 0;
+                font-size: 16px;
+            }
+
+            .info span {
+                color: var(--dark-gold);
+                font-weight: bold;
+            }
+
+            .btn {
+                padding: 12px 25px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-weight: bold;
+                transition: all 0.3s ease;
+                margin: 10px 5px;
+            }
+
+            .btn-primary {
+                background-color: var(--primary-gold);
+                color: var(--black);
+            }
+
+            .btn-primary:hover {
+                background-color: var(--dark-gold);
+                color: var(--white);
+            }
+
+            .btn-success {
+                background-color: var(--black);
+                color: var(--primary-gold);
+            }
+
+            .btn-success:hover {
+                background-color: var(--dark-gold);
+            }
+
+            .feedback-section {
+                background-color: var(--light-gray);
+                padding: 50px 0;
+                margin-top: 50px;
+            }
+
+            .feedback-section h3 {
+                color: var(--black);
+                text-align: center;
+                margin-bottom: 30px;
+            }
+
+            .feedback-block {
+                background: var(--white);
+                padding: 20px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            }
+
+            .news-section {
+                padding: 50px 0;
+            }
+
+            .news-block {
+                margin-bottom: 30px;
+            }
+
+            .inner-box {
+                background: var(--white);
+                border-radius: 8px;
+                overflow: hidden;
+                transition: transform 0.3s ease;
+
+            }
+
+            .inner-box:hover {
+                transform: translateY(-5px);
+            }
+
+            .lower-content {
+                padding: 20px;
+            }
+
+            .post-meta {
+                list-style: none;
+                margin-bottom: 10px;
+                color: var(--dark-gold);
+            }
+
+            input[type="text"],
+            textarea {
+                width: 100%;
+                padding: 10px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                margin-bottom: 10px;
+            }
+
+            .ui-datepicker {
+                background: var(--white);
+                border: 1px solid var(--primary-gold);
+                border-radius: 8px;
+                padding: 10px;
+            }
+
+            .ui-datepicker-header {
+                background: var(--black);
+                color: var(--primary-gold);
+                padding: 5px;
+                border-radius: 5px;
+            }
+
+            @media (max-width: 768px) {
+                .basic-details .row {
+                    flex-direction: column;
+                }
+
+                .image-column,
+                .info-column {
+                    width: 100%;
+                }
+            }
+
+            .row.clearfix .news-block {
+                display: flex;
+                flex-direction: column;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                overflow: hidden;
+                margin: 15px 0;
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                transition: transform 0.3s ease;
+            }
+            .row.clearfix .news-block:hover {
+                transform: scale(1.05);
+            }
+            .news-block .image {
+                height: auto;
+                overflow: hidden;
+            }
+            .news-block .image h\\:graphicImage {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: transform 0.3s ease;
+            }
+            .news-block:hover .image h\\:graphicImage {
+                transform: scale(1.1);
+            }
+            .news-block .lower-content {
+                padding: 15px;
+                text-align: center;
+                background-color: #fff;
+            }
+            .news-block .lower-content .post-meta {
+                list-style: none;
+                padding: 0;
+                margin: 10px 0;
+            }
+            .news-block .lower-content .post-meta li {
+                font-size: 14px;
+                color: #777;
+                margin: 5px 0;
+            }
+            .news-block .lower-content h3 {
+                font-size: 18px;
+                color: #333;
+                margin: 10px 0;
+                font-weight: bold;
+            }
+
+        </style>
+    </h:head>
+
+    <h:body>
+
+
+        <section class="page-title" style="background-image:url(../resources/images/background/5.jpg)">
+            <div class="auto-container">
+                <h2>Designer Details</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="./listdesigner.xhtml">Designer</a></li>
+                    <li>Designer Details</li>
+                </ul>
+            </div>
+        </section>
+        <h:form>
+            <h:commandButton value="Back" action="listdesigner.xhtml" styleClass="btn btn-primary" />
+        </h:form>
+        <section class="shop-single-section">
+            <div class="auto-container">
+                <div class="shop-single">
+                    <div class="product-details">
+                        <!-- Basic Details Form -->
+                        <h:form id="consultationForm">
+                            <div class="basic-details">
+                                <div class="row clearfix">
+                                    <!-- Designer Image -->
+                                    <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                                        <figure class="image-box">
+                                            <h:graphicImage value="../resources/images/designer/#{designerMB.selectedDesigner.image}" alt="Designer Image" styleClass="lightbox-image" />
+                                        </figure>
+                                    </div>
+                                    <!-- Designer Info -->
+                                    <div class="info-column col-lg-6 col-md-12 col-sm-12">
+                                        <div class="inner-column">
+                                            <h4>
+                                                <h:outputText value="#{designerMB.selectedDesigner.firstName} #{designerMB.selectedDesigner.lastName}" />
+                                            </h4>
+                                            <div class="info">Phone: <span><h:outputText value="#{designerMB.selectedDesigner.phone}" /></span></div>
+                                            <div class="info">Address: <span><h:outputText value="#{designerMB.selectedDesigner.address}" /></span></div>
+                                            <div class="info">Experience: <span><h:outputText value="#{designerMB.selectedDesigner.experience}" /> years</span></div>
+                                            <h:panelGrid columns="2" cellpadding="5">
+                                                <h:outputLabel for="inline" value="Date Time:" />
+                                                <div class="field col-12 md:col-4">
+
+                                                    <p:datePicker id="inline" 
+                                                                  value="#{consultationsMB.consultations.scheduleddatetime}" 
+                                                                  inline="true" 
+                                                                  showTime="true" 
+                                                                  timeInput="true" 
+                                                                  required="true" 
+                                                                  requiredMessage="Please select a date and time." 
+                                                                  pattern="dd/MM/yyyy HH:mm" />
+
+                                                </div>
+
+
+                                                <h:outputLabel for="notes" value="Notes:" /><br/>
+                                                <h:inputTextarea id="notes" required="true"
+                                                                 value="#{consultationsMB.consultations.notes}" 
+                                                                 rows="5" 
+                                                                 cols="30" />
+                                            </h:panelGrid>
+                                            <h:commandButton value="Book" action="#{consultationsMB.createConsultation()}" styleClass="btn btn-primary" />
+                                            <h:commandButton value="Mark Designer" action="#{designerMB.markDesigner()}" styleClass="btn btn-success" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+
+                        <h:form id="feedbackForm">
+                            <div class="feedback-section">
+                                <h3>Leave Feedback for #{designerMB.selectedDesigner.firstName} #{designerMB.selectedDesigner.lastName}</h3>
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputLabel for="feedbackContent" value="Your Feedback:" />
+                                    <h:inputText id="feedbackContent" value="#{feedbackMB.feedbackDes.content}" required="true"/>
+                                    <h:outputLabel for="feedbackRating" value="Rating (1-5):" />
+                                    <h:selectOneMenu value="#{feedbackMB.feedbackDes.rating}">
+                                        <f:selectItem itemValue="1" itemLabel="1" />
+                                        <f:selectItem itemValue="2" itemLabel="2" />
+                                        <f:selectItem itemValue="3" itemLabel="3" />
+                                        <f:selectItem itemValue="4" itemLabel="4" />
+                                        <f:selectItem itemValue="5" itemLabel="5" />
+
+                                    </h:selectOneMenu>
+
+                                    <h:commandButton value="Submit Feedback" action="#{feedbackMB.submitFeedback()}" styleClass="btn btn-primary" />
+                                </h:panelGrid>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="feedback-section">
+            <div class="auto-container">
+                <div class="sec-title">
+                    <h2>Feedback for #{designerMB.selectedDesigner.firstName} #{designerMB.selectedDesigner.lastName}</h2>
+                </div>
+                <div class="row clearfix">
+                    <ui:repeat value="#{feedbackMB.loadFeedbackForDesigner()}" var="feedbackItem">
+                        <div class="feedback-block col-lg-12 col-md-12 col-sm-12">
+                            <div class="inner-box">
+                                <div class="feedback-content">
+                                    <p><strong>By <h:outputText value="#{feedbackItem.userID.fullName}" /></strong> </p>
+                                    <p><strong>Feedback:</strong> <h:outputText value="#{feedbackItem.content}" /></p>
+                                    <p><strong>Rating:</strong> <h:outputText value="#{feedbackItem.rating}" /> / 5</p>
+                                </div>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </div>
+        </section>
+        <section class="news-section">
+            <div class="auto-container">
+                <div class="sec-title">
+                    <h2>Projects by Designer</h2>
+                </div>
+                <div class="row clearfix">
+                    <ui:repeat value="#{projectDesignerMB.projectList}" var="item">
+                        <div class="news-block col-lg-4 col-md-6 col-sm-12">
+                            <div class="inner-box wow fadeInRight">
+                                <div class="image">
+                                    <h:graphicImage value="../resources/images/designer/project/#{item.image}" style="width: 100%; height: auto;" />
+                                </div>
+                                <div class="lower-content">
+                                    <ul class="post-meta">
+                                        <li><h:outputText value="#{item.projectName}" /></li>
+                                        <li><h:outputText value="#{item.description}" /></li>
+                                    </ul>
+                                    <h3><h:outputText value="#{item.projectName}" /></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </div>
+        </section>
+
+        <!--        <ui:insert name="bottom">
+                    <ui:include src="../footter.xhtml"/>
+                </ui:insert>-->
+
+        <h:outputScript library="primefaces" name="core.js"/>
+        <h:outputScript library="primefaces" name="components.js"/>
+
+        <h:outputScript name="locales/locale-es.js" library="primefaces" />
+        <script src="../resources/js/popper.min.js"></script>
+        <script src="../resources/js/bootstrap.min.js"></script>
+    </h:body>
+</html>

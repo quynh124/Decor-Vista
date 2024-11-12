@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>My Booking List</title>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"/>
+        <style>
+            :root {
+                --gold: #D4AF37;
+                --dark-gold: #B4941E;
+                --black: #1A1A1A;
+                --gray: #333333;
+                --light-gray: #F5F5F5;
+            }
+
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+                font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            }
+
+            body {
+
+                color: var(--light-gray);
+                min-height: 100vh;
+                padding: 2rem;
+            }
+
+            .container {
+                background: var(--gray);
+                border-radius: 15px;
+                padding: 2rem;
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            }
+
+            h2 {
+                color: var(--gold);
+                margin-bottom: 2rem;
+                font-size: 2rem;
+                border-bottom: 2px solid var(--gold);
+                padding-bottom: 1rem;
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+            }
+
+            h2 i {
+                font-size: 1.8rem;
+            }
+
+            .search-box {
+                margin-bottom: 2rem;
+                position: relative;
+            }
+
+            .search-box input {
+                width: 100%;
+                padding: 0.8rem 1rem 0.8rem 2.5rem;
+                border: 1px solid var(--gold);
+                background: rgba(26, 26, 26, 0.8);
+                border-radius: 5px;
+                color: white;
+                font-size: 1rem;
+            }
+
+            .search-box i {
+                position: absolute;
+                left: 1rem;
+                top: 50%;
+                transform: translateY(-50%);
+                color: var(--gold);
+            }
+
+            .table-container {
+                overflow-x: auto;
+                margin-top: 1rem;
+            }
+
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                background: rgba(26, 26, 26, 0.6);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+
+            th {
+                background-color: var(--gold);
+                color: var(--black);
+                font-weight: bold;
+                text-align: left;
+                padding: 1rem;
+                white-space: nowrap;
+            }
+
+            td {
+                padding: 1rem;
+                border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+                color: var(--light-gray);
+            }
+
+            tr:hover {
+                background: rgba(212, 175, 55, 0.1);
+            }
+
+            .status-pending {
+                color: var(--gold);
+                background: rgba(212, 175, 55, 0.1);
+                padding: 0.3rem 0.8rem;
+                border-radius: 15px;
+                font-size: 0.9rem;
+                display: inline-block;
+            }
+
+            .designer-info {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+            }
+
+            .designer-avatar {
+                width: 35px;
+                height: 35px;
+                background: var(--gold);
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: var(--black);
+                font-weight: bold;
+            }
+
+            .date-time {
+                color: var(--gold);
+                font-weight: 500;
+            }
+
+            @media (max-width: 768px) {
+                .container {
+                    padding: 1rem;
+                }
+
+                td, th {
+                    padding: 0.8rem;
+                }
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <ui:insert name="header">
+            <ui:include src="../header.xhtml"/>
+        </ui:insert>
+        <br/><br/><br/><br/><br/><br/>
+        <div class="container">
+            <h2>
+                <i class="fas fa-calendar-check"></i>
+                Booking List
+            </h2>
+
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" placeholder="Tìm kiếm lịch tư vấn..."/>
+            </div>
+
+            <h:form id="consultationForm">
+                <div class="table-container">
+                    <h:dataTable value="#{consultationsMB.loadUserConsultations()}" var="consultation">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Consultation ID" />
+                            </f:facet>
+                            <h:outputText value="#{consultation.consultationID}" />
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Designer" />
+                            </f:facet>
+                            <div class="designer-info">
+                                <div class="designer-avatar">
+                                    #{consultation.designerID.firstName.charAt(0)}
+                                </div>
+                                <div>
+                                    <h:outputText value="#{consultation.designerID.firstName} " />
+                                    <h:outputText value="#{consultation.designerID.lastName}" />
+                                </div>
+                            </div>
+                        </h:column>
+
+
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Note" />
+                            </f:facet>
+                            <h:outputText value="#{consultation.notes}" />
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Date" />
+                            </f:facet>
+                            <span class="date-time">
+                                <i class="far fa-calendar-alt"></i>
+                                <h:outputText value="#{consultation.scheduleddatetime}">
+                                    <f:convertDateTime pattern="dd/MM/yyyy" />
+                                </h:outputText>
+                            </span>
+                        </h:column>
+
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="Time" />
+                            </f:facet>
+                            <span class="date-time">
+                                <i class="far fa-clock"></i>
+                                <h:outputText value="#{consultation.scheduleddatetime}">
+                                    <f:convertDateTime pattern=" HH:mm" timeZone="GMT+7" /> <!-- Thay đổi múi giờ theo yêu cầu -->
+                                </h:outputText>
+
+                            </span>
+                        </h:column>
+                    </h:dataTable>
+                </div>
+            </h:form>
+        </div>
+    </h:body>
+</html>

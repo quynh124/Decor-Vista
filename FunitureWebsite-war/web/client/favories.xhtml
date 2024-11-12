@@ -1,0 +1,215 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Decor Vista</title>
+        <style>
+            /* Tổng quan bảng */
+            .cart-table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-bottom: 30px;
+            }
+
+            .cart-table th,
+            .cart-table td {
+                padding: 15px;
+                text-align: center;
+                border-bottom: 1px solid #e0e0e0;
+            }
+
+            .cart-header {
+                background-color: #f8f8f8;
+                font-weight: bold;
+                color: #333;
+            }
+
+            /* Hình ảnh sản phẩm */
+            .prod-thumb img {
+                width: 80px;
+                height: auto;
+                border-radius: 8px;
+                transition: transform 0.3s ease;
+            }
+
+            .prod-thumb a:hover img {
+                transform: scale(1.1);
+            }
+
+            /* Tên sản phẩm */
+            .prod-title {
+                font-size: 18px;
+                color: #333;
+                font-weight: bold;
+                margin: 0;
+                padding: 0;
+            }
+
+            /* Cột giá tiền */
+            .price {
+                font-size: 16px;
+                color: #27ae60;
+                font-weight: bold;
+            }
+
+            /* Nút số lượng */
+            .quantity-spinner {
+                width: 60px;
+                text-align: center;
+                padding: 5px;
+                font-size: 16px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+
+            .btn {
+                padding: 10px 20px;
+                border-radius: 4px;
+                font-size: 16px;
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+                text-decoration: none;
+            }
+
+            .btn {
+                background-color: #FFA500;
+                color: #fff;
+            }
+
+            .btn:hover {
+                background-color: #000000;
+                color: #FFA500;
+            }
+
+            .btn-danger {
+                background-color: #FFA500;
+                color: #FFA500;
+            }
+
+            .btn-danger:hover {
+                background-color: #c0392b;
+            }
+
+            .trash {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+                transition: transform 0.3s ease;
+            }
+
+            .trash:hover {
+                transform: scale(1.2);
+            }
+
+        </style>
+    </h:head>
+    <h:body>
+
+        <ui:insert name="header">
+            <ui:include src="../header.xhtml"/>
+        </ui:insert>
+
+        <section class="page-title" style="background-image:url(../resources/images/background/5.jpg)">
+            <div class="auto-container">
+                <h2>Favorites</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="../home.xhtml">home</a></li>
+                    <li>Favorites</li>
+                </ul>
+            </div>
+        </section>
+        <!--End Page Title-->
+
+        <!--Cart Section-->
+        <h:form>
+            <section class="cart-section">
+                <div class="auto-container">
+
+                    <div class="cart-outer">
+                        <div class="table-outer">
+                            <c:if test="#{loginMB.getLoggedInUser() == null}">
+                                <div class="wishlist__empty">
+                                    <h2>You are not logged in!</h2>
+                                    <p>Please <a href="login.xhtml">login</a> to view your favorite products.</p>
+                                </div>
+                            </c:if>
+
+                            <c:if test="#{loginMB.getLoggedInUser() != null and empty favoritesMB.favoriteProducts}">
+                                <div class="wishlist__empty">
+                                    <h2>No favorite products!</h2>
+                                    <p>Looks like you haven't added any products to your favorites yet.</p>
+                                </div>
+                            </c:if>
+
+                            <c:if test="#{loginMB.getLoggedInUser() != null and not empty favoritesMB.favoriteProducts}">
+                                <table class="cart-table">
+
+                                    <tbody>
+
+                                        <h:dataTable value="#{favoritesMB.favoriteProducts}" var="item" class="cart-table">
+                                            <h:column>
+                                                <f:facet name="header">Images</f:facet>
+                                                <div class="column-box">
+                                                    <figure class="prod-thumb">
+                                                        <a href="#">
+                                                            <h:graphicImage value="/admin/resources/image/products/#{item.productID.image}" 
+                                                                            alt="#{item.productID.productName}" 
+                                                                            style="width: 100px; height: 100px" />
+                                                        </a>
+                                                    </figure>
+                                                </div>
+                                            </h:column>
+
+                                            <h:column>
+                                                <f:facet name="header">Product Name</f:facet>
+                                                <h:commandLink action="#{productsMB.findProductforDetail(item.productID.productID)}">
+                                                    <h:outputText value="#{item.productID.productName}" />
+                                                </h:commandLink>
+                                            </h:column>
+
+                                            <h:column>
+                                                <f:facet name="header">Size</f:facet>
+                                                <h:outputText value="#{item.productID.size}" /> 
+                                            </h:column>
+
+                                            <h:column>
+                                                <f:facet name="header">Unit Price</f:facet>
+                                                <h:outputText value="#{item.productID.unitPrice}" /> VND
+                                            </h:column>
+
+                                            <h:column>
+                                                <f:facet name="header">Remove</f:facet>
+                                                <h:form styleClass="remove-form">
+                                                    <h:form styleClass="remove-form">
+                                                        <h:commandButton image="../resources/images/icons/delete.png" action="#{favoritesMB.deleteDeliveries(item.id)}" style="width: 30px" type="submit" />
+                                                    </h:form>
+                                                </h:form>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </tbody>
+                                </table>
+                            </c:if>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="continue__btn">
+                                    <h:commandLink value="Continue Shopping" action="shop.xhtml" class="btn "/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </h:form>
+
+        <ui:insert name="bottom">
+            <ui:include src="../footter.xhtml"/>
+        </ui:insert>
+
+    </h:body>
+</html>

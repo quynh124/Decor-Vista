@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Designer Availability Calendar</title>
+        <!-- External CSS -->
+        <link rel="stylesheet" href="../resources/css/main.css" />
+        <link rel="stylesheet" href="../resources/css/bootstrap.css" />
+        <link rel="stylesheet" href="../resources/css/style.css" />
+        <link rel="stylesheet" href="../resources/css/responsive.css" />
+        <link rel="stylesheet" href="../resources/css/owl.css" />
+        <link rel="stylesheet" href="../resources/css/jquery-ui.css" />
+        <link rel="stylesheet" href="../resources/css/jquery.bootstrap-touchspin.css" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css" />
+        <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
+        <link rel="stylesheet" href="../resources/css/calendar.css" />
+
+        <!-- Favicon -->
+        <link rel="shortcut icon" href="../resources/images/favicon.png" type="image/x-icon" />
+        <link rel="icon" href="../resources/images/favicon.png" type="image/x-icon" />
+
+        <!-- External JS Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+        <!-- Local JS Libraries -->
+        <script src="../resources/js/jquery.js"></script>
+        <script src="../resources/js/popper.min.js"></script>
+        <script src="../resources/js/jquery-ui.js"></script>
+        <script src="../resources/js/bootstrap.min.js"></script>
+        <script src="../resources/js/jquery.fancybox.js"></script>
+        <script src="../resources/js/owl.js"></script>
+        <script src="../resources/js/wow.js"></script>
+        <script src="../resources/js/isotope.js"></script>
+        <script src="../resources/js/appear.js"></script>
+        <script src="../resources/js/scrollbar.js"></script>
+
+        <!-- Meta Tags -->
+        <meta name="keywords" content="calendar, events, reminders, javascript, html, css" />
+    </h:head>
+    <h:body>
+       
+    <!-- Include header section -->
+    <ui:insert name="header">
+        <ui:include src="header.xhtml"/>
+    </ui:insert>
+    <h:form id="feedbackForm" style="
+    padding-right: 1200px;
+    padding-top: 150px;
+">
+    <!-- Main form section -->
+    <div class="feedback-section container mt-5 mb-5">
+        <h3 class="text-center mb-4">Edit Consultation Details</h3>
+
+        <!-- Form Layout -->
+        <div class="row g-3" id="editConsultationForm">
+            <!-- Day Field -->
+            <div class="col-md-6">
+                <h:outputLabel for="day" value="Day:" />
+                <h:inputText id="day" value="#{consultationsMB.selectedConsultation.day}" 
+                             required="true" requiredMessage="Day is required" 
+                             styleClass="form-control">
+                    <f:convertDateTime pattern="yyyy-MM-dd" />
+                </h:inputText>
+                <h:message for="day" styleClass="text-danger small" />
+            </div>
+
+            <!-- Scheduled DateTime Field -->
+            <div class="col-md-6">
+                <h:outputLabel for="scheduleddatetime" value="Scheduled DateTime:" />
+                <h:inputText id="scheduleddatetime" value="#{consultationsMB.selectedConsultation.scheduleddatetime}" 
+                             required="true" requiredMessage="Scheduled Time is required" 
+                             styleClass="form-control">
+                    <f:convertDateTime pattern="yyyy-MM-dd HH:mm" />
+                </h:inputText>
+                <h:message for="scheduleddatetime" styleClass="text-danger small" />
+            </div>
+
+            <!-- Notes Field -->
+            <div class="col-12">
+                <h:outputLabel for="notes" value="Notes:" />
+                <h:inputTextarea id="notes" value="#{consultationsMB.selectedConsultation.notes}" 
+                                 rows="4" styleClass="form-control" />
+            </div>
+
+            <!-- Status Field -->
+            <div class="col-12">
+                <h:outputLabel for="status" value="Status:" />
+                <h:selectOneMenu id="status" value="#{consultationsMB.selectedConsultation.status}" required="true" styleClass="form-control">
+                    <f:selectItem itemLabel="Select Status" itemValue="" />
+                    <f:selectItem itemLabel="Appointment" itemValue="Appointment" />
+                    <f:selectItem itemLabel="Cancel Appointment" itemValue="Cancel Appointment" />
+                </h:selectOneMenu>
+                <h:message for="status" styleClass="text-danger small" />
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="text">
+                <h:commandButton value="Save" action="#{consultationsMB.updateConsultation()}"  styleClass="btn btn-primary" />
+                <h:commandButton value="Cancel" action="profile" immediate="true" styleClass="btn btn-default" />
+            </div>
+        </div> <!-- End of Row -->
+    </div>
+</h:form>
+
+
+    </h:body>
+</html>

@@ -1,0 +1,118 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Decor Vista Admin</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <link type="text/css" rel="stylesheet" href="resources/css/styles.css" />
+
+        <!--<link type="text/css" rel="stylesheet" href="resources/css/form.css" />-->
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+        <link href="https://cdn.datatables.net/2.0.7/css/dataTables.dataTables.min.css" rel="stylesheet" />
+        <script src="https://use.fontawesome.com/releases/v6.1.0/js/all.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.0/chart.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
+       
+    </h:head>
+
+
+    <h:body class="sb-nav-fixed">
+        <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+            <!-- Navbar Brand-->
+            <a class="navbar-brand ps-3" href="#">
+                <img src="resources/image/admin1.jpg"  style="max-width: 50px; max-height: 50px;"/>
+
+            </a>
+
+            <!-- Sidebar Toggle-->
+            <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+          
+            
+            <!-- Navbar-->
+            <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                        
+                        <li><hr class="dropdown-divider" /></li>
+                        <li><a class="dropdown-item" href="../home.xhtml">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+         <div id="layoutSidenav">
+            <div id="layoutSidenav_nav">
+                <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                    <div class="sb-sidenav-menu">
+                        <div class="nav">
+                            <div class="sb-sidenav-menu-heading">Core</div>
+                            <a class="nav-link" href="./dashboard.xhtml">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                DashBoard
+                            </a>
+                            <div class="sb-sidenav-menu-heading">Addons</div>
+                          
+                            <a class="nav-link" href="./customer.xhtml">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                User Management
+                            </a>
+                            <a class="nav-link" href="./category.xhtml">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Category Management
+                            </a>
+                            <a class="nav-link" href="./subcategory.xhtml">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Subcategory Management
+                            </a>
+                              <a class="nav-link" href="./designer.xhtml">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                              Designer Management
+                            </a>
+                            <a class="nav-link" href="./products.xhtml">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Product Management
+                            </a>
+                           
+                          
+                             <a class="nav-link" href="./feedback.xhtml">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Feedback Management
+                            </a>
+                          
+                            <a class="nav-link" href="./consultations.xhtml">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Consultations Management
+                            </a>
+                            <a class="nav-link" href="./suppliers.xhtml">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Suppliers Management
+                            </a>
+                            <a class="nav-link" href="./projectdesigner.xhtml">
+                                <div class="sb-nav-link-icon"><i class="fas fa-table"></i></div>
+                                Project Designer Management
+                            </a>
+                           
+
+                        </div>
+                    </div>
+                    <div class="sb-sidenav-footer">
+
+                    </div>
+                </nav>
+            </div>
+             <script src="resources/js/scripts.js"/>
+        <script src="resources/js/datatablesSimple.js"/>
+    </div>    
+    </h:body>
+
+</html>

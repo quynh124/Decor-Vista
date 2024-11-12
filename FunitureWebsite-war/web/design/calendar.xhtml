@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<head>
+    <title>Designer Calendar</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <h:outputStylesheet library="css" name="calendar.css" />
+    <style>
+        /* You can move your inline CSS to a separate CSS file (calendar.css) */
+        /* ... (Include the CSS you provided earlier) ... */
+    </style>
+</head>
+<h:body>
+    <div class="container">
+        <div class="header">
+            <a href="#">Home</a>
+            <span>&gt;</span>
+            <a href="#">Calendar</a>
+        </div>
+        <div class="calendar-header">
+            <h:commandButton value="+ Add Event" styleClass="add-event-btn" onclick="document.getElementById('addEventModal').style.display='block'; return false;" />
+            <h2>October 2024</h2>
+            <div class="view-buttons">
+                <h:commandButton value="Day" styleClass="view-btn" />
+                <h:commandButton value="Week" styleClass="view-btn" />
+                <h:commandButton value="Month" styleClass="view-btn active" />
+            </div>
+        </div>
+        <div class="calendar">
+            <!-- Render Days of the Week Headers -->
+            <div><strong>Sun</strong></div>
+            <div><strong>Mon</strong></div>
+            <div><strong>Tue</strong></div>
+            <div><strong>Wed</strong></div>
+            <div><strong>Thu</strong></div>
+            <div><strong>Fri</strong></div>
+            <div><strong>Sat</strong></div>
+
+            <!-- Iterate through the days of the month -->
+            <!-- Assuming October 2024 starts on a Tuesday -->
+            <!-- Fill the first two cells with previous month's dates or leave empty -->
+            <div></div> <!-- Sunday -->
+            <div></div> <!-- Monday -->
+            <!-- Start rendering from the 1st to 31st -->
+            <ui:repeat var="day" value="#{calendarMB.generateDays()}">
+                <div>
+                    <span>#{day.date}</span>
+                    <!-- Display Availability -->
+                    <ui:repeat var="availability" value="#{calendarMB.getAvailabilityByDate(day.date)}">
+                        <div class="event green">Available</div>
+                    </ui:repeat>
+                    <!-- Display Consultations -->
+                    <ui:repeat var="consultation" value="#{calendarMB.getConsultationByDate(day.date)}">
+                        <div class="event red">Appointment: #{consultation.userID.name} at #{consultation.scheduleddatetime}</div>
+                    </ui:repeat>
+                </div>
+            </ui:repeat>
+        </div>
+    </div>
+
+    <!-- Add Event Modal -->
+    <div id="addEventModal" class="modal" style="display:none;">
+        <h:form>
+            <div class="modal-header">
+                <h2>Add New Event</h2>
+                <h:commandLink value="&times;" onclick="document.getElementById('addEventModal').style.display='none'; return false;" styleClass="close" />
+            </div>
+            <div class="modal-body">
+                <h:outputLabel for="eventTitle" value="Event Title :" />
+                <h:inputText id="eventTitle" value="#{calendarMB.eventTitle}"  required="true" />
+
+                <div class="date-group">
+                    <div>
+                        <h:outputLabel for="startDate" value="Start Date" />
+                        <h:inputText id="startDate" value="#{calendarMB.startDate}"  required="true">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:inputText>
+                    </div>
+                    <div>
+                        <h:outputLabel for="endDate" value="End Date" />
+                        <h:inputText id="endDate" value="#{calendarMB.endDate}" required="true">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:inputText>
+                    </div>
+                </div>
+
+                <h:outputLabel value="Label" />
+                <div class="label-group">
+                    <h:selectOneRadio value="#{calendarMB.label}">
+<!--                        <h:selectItem itemValue="available" itemLabel="Available" />
+                        <h:selectItem itemValue="appointment" itemLabel="Appointment" />-->
+                    </h:selectOneRadio>
+                </div>
+
+                <h:outputLabel for="description" value="Description" />
+                <h:inputTextarea id="description" value="#{calendarMB.description}" rows="4" ></h:inputTextarea>
+            </div>
+            <div class="modal-footer">
+                <h:commandButton value="Cancel" styleClass="cancel-btn" onclick="document.getElementById('addEventModal').style.display='none'; return false;" />
+                <h:commandButton value="Save" styleClass="save-btn" action="#{calendarMB.addEvent}" />
+            </div>
+        </h:form>
+    </div>
+
+    <script>
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            var modal = document.getElementById('addEventModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</h:body>
+</html>

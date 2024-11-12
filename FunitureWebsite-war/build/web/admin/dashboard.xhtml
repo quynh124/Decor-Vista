@@ -1,0 +1,402 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>DecorVista - Admin</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        <!-- Fonts and icons -->
+        <script src="resources/assets/js/plugin/webfont/webfont.min.js"></script>
+
+        <!-- CSS Files -->
+        <link rel="stylesheet" href="resources/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="resources/css/plugins.min.css" />
+        <link rel="stylesheet" href="resources/css/kaiadmin.min.css" />
+
+        <!-- CSS Just for demo purpose, don't include it in your project -->
+        <link rel="stylesheet" href="resources/css/demo.css" />
+
+    </h:head>
+    <h:body>
+        <div id="top">
+            <ui:insert name="header">
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+        </div>
+
+        <div class="main-panel">
+
+
+            <div class="container">
+                <div class="page-inner">
+                    <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
+                        <div>
+                            <h3 class="fw-bold mb-3">Dashboard</h3>
+
+                        </div>
+
+                    </div>
+                    <div class="row row-card-no-pd">
+                        <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6><b>Total Products</b></h6>
+                                            <p class="text-muted">All Products Value</p>
+                                        </div>
+                                        <h4 class="text-info fw-bold"><h:outputText value="#{dashboardMB.totalProducts}" /></h4>
+                                    </div>
+                                    <div class="progress progress-sm">
+                                        <div
+                                            class="progress-bar bg-info w-25"
+                                            role="progressbar"
+                                            aria-valuenow="#{dashboardMB.totalProducts}"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            ></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <p class="text-muted mb-0">Change</p>
+                                        <p class="text-muted mb-0"><h:outputText value="#{dashboardMB.totalProducts}" /></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6><b>Total Supplier</b></h6>
+                                            <p class="text-muted">All Supplier Value</p>
+                                        </div>
+                                        <h4 class="text-success fw-bold">#{dashboardMB.totalSuppliers}</h4>
+                                    </div>
+                                    <div class="progress progress-sm">
+                                        <div
+                                            class="progress-bar bg-success w-25"
+                                            role="progressbar"
+                                            aria-valuenow="#{dashboardMB.totalSuppliers}"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            ></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <p class="text-muted mb-0">Change</p>
+                                        <p class="text-muted mb-0">#{dashboardMB.totalSuppliers}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6><b>Total Designer</b></h6>
+                                            <p class="text-muted">All Designer Value</p>
+                                        </div>
+                                        <h4 class="text-danger fw-bold"><h:outputText value="#{dashboardMB.totalDesigners}" /></h4>
+                                    </div>
+                                    <div class="progress progress-sm">
+                                        <div
+                                            class="progress-bar bg-danger w-50"
+                                            role="progressbar"
+                                            aria-valuenow="#{dashboardMB.totalDesigners}"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            ></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <p class="text-muted mb-0">Change</p>
+                                        <p class="text-muted mb-0"><h:outputText value="#{dashboardMB.totalDesigners}" /></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-6 col-md-6 col-xl-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex justify-content-between">
+                                        <div>
+                                            <h6><b>Total Customer </b></h6>
+                                            <p class="text-muted">All Customer Value</p>
+                                        </div>
+                                        <h4 class="text-secondary fw-bold"><h:outputText value="#{dashboardMB.totalCustomers}" /></h4>
+                                    </div>
+                                    <div class="progress progress-sm">
+                                        <div
+                                            class="progress-bar bg-secondary w-25"
+                                            role="progressbar"
+                                            aria-valuenow="#{dashboardMB.totalCustomers}"
+                                            aria-valuemin="0"
+                                            aria-valuemax="100"
+                                            ></div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mt-2">
+                                        <p class="text-muted mb-0">Change</p>
+                                        <p class="text-muted mb-0"><h:outputText value="#{dashboardMB.totalCustomers}" /></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="card-head-row">
+                                        <div class="card-title">Feedback Product Statistic</div>
+
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="chart-container" style="min-height: 375px">
+                                        <button type="button" id="toggleChartButton" class="btn btn-primary" data-is-five-star="true">
+                                            Show Low Star Count
+                                        </button>
+                                        <canvas id="barChart"></canvas>
+                                    </div>
+                                    <div id="barChart"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card ">
+                                <div class="card-header">
+                                    <div class="card-head-row">
+                                        <div class="card-title">Statistics on designers' consultation schedules</div>
+
+                                    </div>
+
+                                </div>
+                                <canvas id="pieChartCanvas" width="400" height="400"></canvas>
+
+
+                            </div>
+
+                        </div>
+                    </div>                 
+                </div>
+            </div>
+        </div>
+
+        <h:outputScript>
+            document.addEventListener("DOMContentLoaded", function() {
+            // Check if the canvas element exists
+            const pieChartCanvas = document.getElementById('pieChartCanvas');
+            if (!pieChartCanvas) {
+            console.error("Canvas element not found");
+            return;
+            }
+
+            const backgroundColors = [
+            '#FF6384', // Red
+            '#36A2EB', // Blue
+            '#FFCE56', // Yellow
+            '#4BC0C0', // Turquoise
+            '#9966FF', // Purple
+            '#FF9F40', // Orange
+            '#FF5733', // Coral
+            '#33FF57', // Lime Green
+            '#5733FF', // Indigo
+            '#F3FF33', // Bright Yellow
+            '#FF33B5', // Pink
+            '#C70039', // Crimson
+            '#FFC300', // Gold
+            '#DAF7A6', // Light Green
+            '#581845', // Dark Purple
+            '#900C3F', // Wine Red
+            '#FFC0CB', // Light Pink
+            '#E1B12C', // Amber
+            '#6F1E51', // Dark Pink
+            '#1B1464', // Dark Blue
+            '#0be881'  // Bright Green
+            ];
+
+            // Data for the consultation statistics
+            const consultationStats = [
+            <ui:repeat value="#{dashboardMB.consultationStats}" var="stat">
+                ['#{stat[1]} #{stat[2]}', #{stat[3]}], 
+            </ui:repeat>
+            ];
+
+            // Extract labels and data from the statistics
+            const labels = consultationStats.map(stat => stat[0]); // Designer names
+            const data = consultationStats.map(stat => stat[1]); // Consultation counts
+
+            // Create the pie chart
+            const chart = new Chart(pieChartCanvas.getContext('2d'), {
+            type: 'pie', // Change type to 'pie'
+            data: {
+            labels: labels,
+            datasets: [{
+            label: 'Consultation Count',
+            data: data,
+            backgroundColor: backgroundColors.slice(0, data.length),
+            borderWidth: 1
+            }]
+            },
+            options: {
+            responsive: true,
+            plugins: {
+            legend: {
+            position: 'top', // Position of the legend
+            },
+            title: {
+            display: true,
+            text: 'Consultation Statistics by Designer' // Title of the chart
+            }
+            }
+            }
+            });
+            });
+        </h:outputScript>
+
+        <h:outputScript>
+            document.addEventListener("DOMContentLoaded", function() {
+            // Kiểm tra xem phần tử canvas có tồn tại không
+            const barChartCanvas = document.getElementById('barChart');
+            if (!barChartCanvas) {
+            console.error("Canvas element not found");
+            return;
+            }
+
+            // Màu sắc cho các cột
+            const backgroundColors = [
+            'rgba(255, 99, 132, 0.2)',
+            'rgba(54, 162, 235, 0.2)',
+            'rgba(255, 206, 86, 0.2)',
+            'rgba(75, 192, 192, 0.2)', 
+            'rgba(153, 102, 255, 0.2)' 
+            ];
+
+            const borderColors = [
+            'rgba(255, 99, 132, 1)', 
+            'rgba(54, 162, 235, 1)', 
+            'rgba(255, 206, 86, 1)', 
+            'rgba(75, 192, 192, 1)', 
+            'rgba(153, 102, 255, 1)' 
+            ];
+
+
+            const topRatedProducts = [
+            <ui:repeat value="#{dashboardMB.topRatedProducts}" var="product">
+                ['#{product[0]}', '#{product[1]}', #{product[3]}], 
+            </ui:repeat>
+            ];
+
+            const lowRatedProducts = [
+            <ui:repeat value="#{dashboardMB.lowRatedProducts}" var="product">
+                ['#{product[0]}', '#{product[1]}', #{product[2]}], 
+            </ui:repeat>
+            ];
+
+            // Biến để giữ chart instance
+            let chart;
+
+            // Hàm vẽ biểu đồ
+            function drawChart(products, label) {
+            const labels = [];
+            const data = [];
+
+            products.forEach((product) => {
+            labels.push(product[1]);
+            data.push(product[2]); 
+            });
+
+
+            if (chart) {
+            chart.destroy();
+            }
+
+            chart = new Chart(barChartCanvas.getContext('2d'), {
+            type: 'bar',
+            data: {
+            labels: labels,
+            datasets: [{
+            label: label,
+            data: data,
+            backgroundColor: backgroundColors.slice(0, data.length),
+            borderColor: borderColors.slice(0, data.length),
+            borderWidth: 1
+            }]
+            },
+            options: {
+            scales: {
+            y: {
+            beginAtZero: true,
+            ticks: {
+            stepSize: 1,
+            precision: 0,
+            }
+            }
+            }
+            }
+            });
+            }
+
+
+            drawChart(topRatedProducts, 'Five Star Count');
+
+            document.getElementById('toggleChartButton').addEventListener('click', function() {
+            if (this.dataset.isFiveStar === 'true') {
+            drawChart(lowRatedProducts, 'Low Star Count');
+            this.textContent = 'Show Five Star Count'; // 
+            } else {
+            drawChart(topRatedProducts, 'Five Star Count');
+            this.textContent = 'Show Low Star Count'; 
+            }
+            this.dataset.isFiveStar = this.dataset.isFiveStar === 'true' ? 'false' : 'true'; 
+            });
+
+            });
+        </h:outputScript>
+
+
+
+    </h:body>
+    <script src="resources/assets/js/core/jquery-3.7.1.min.js"></script>
+    <script src="resources/assets/js/core/popper.min.js"></script>
+    <script src="resources/assets/js/core/bootstrap.min.js"></script>
+
+    <!-- jQuery Scrollbar -->
+    <script src="resources/assets/js/plugin/jquery-scrollbar/jquery.scrollbar.min.js"></script>
+
+    <!-- Chart JS -->
+    <script src="resources/assets/js/plugin/chart.js/chart.min.js"></script>
+
+    <!-- jQuery Sparkline -->
+    <script src="resources/assets/js/plugin/jquery.sparkline/jquery.sparkline.min.js"></script>
+
+    <!-- Chart Circle -->
+    <script src="resources/assets/js/plugin/chart-circle/circles.min.js"></script>
+
+    <!-- Datatables -->
+    <script src="resources/assets/js/plugin/datatables/datatables.min.js"></script>
+
+    <!-- Bootstrap Notify -->
+    <script src="resources/assets/js/plugin/bootstrap-notify/bootstrap-notify.min.js"></script>
+
+    <!-- jQuery Vector Maps -->
+    <script src="resources/assets/js/plugin/jsvectormap/jsvectormap.min.js"></script>
+    <script src="resources/assets/js/plugin/jsvectormap/world.js"></script>
+
+    <!-- Sweet Alert -->
+    <script src="resources/assets/js/plugin/sweetalert/sweetalert.min.js"></script>
+
+    <!-- Kaiadmin JS -->
+    <script src="resources/assets/js/kaiadmin.min.js"></script>
+
+    <!-- Kaiadmin DEMO methods, don't include it in your project! -->
+    <script src="resources/assets/js/setting-demo.js"></script>
+    <script src="resources/assets/js/demo.js"></script>
+
+</html>

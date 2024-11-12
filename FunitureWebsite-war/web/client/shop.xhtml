@@ -1,0 +1,291 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Decor Vista</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+        <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet"/>
+        <style>
+            .search-container {
+                position: relative;
+                display: flex;
+                align-items: center; /* Center items vertically */
+                border: 1px solid #ccc; /* Border styling */
+                border-radius: 20px; /* Rounded corners */
+                overflow: hidden; /* Prevent content overflow */
+                width: 250px; /* Set a fixed width for the container */
+                transition: box-shadow 0.4s ease; /* Smooth transition for box-shadow */
+            }
+
+            .search-input {
+                width: 100%; /* Use the full width of the container */
+                padding: 10px 40px; /* Padding for the input */
+                border: none; /* Remove border for the input */
+                outline: none; /* Remove outline */
+                font-size: 16px; /* Font size */
+                transition: color 0.4s ease; /* Smooth transition for text color */
+            }
+
+            .search-container:hover {
+                box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add a shadow effect on hover */
+            }
+
+            .record-icon {
+                position: absolute;
+                right: 10px; /* Position the microphone icon */
+                cursor: pointer; /* Change cursor to pointer on hover */
+                color: #888; /* Color of the icon */
+                font-size: 20px; /* Adjust icon size */
+            }
+
+            .search-icon {
+                position: absolute;
+                left: 10px; /* Position the search icon */
+                color: #888; /* Color of the icon */
+                font-size: 20px; /* Icon size */
+            }
+
+            .search-input::placeholder {
+                color: transparent; /* Initially hide placeholder text */
+                transition: color 0.4s ease; /* Transition for placeholder color */
+            }
+
+            .search-container:hover .search-input::placeholder {
+                color: #aaa; /* Show darker color on hover */
+            }
+
+            .search-container:hover .search-input {
+                color: #000; /* Change input text color on hover */
+            }
+
+            /* CSS for pagination */
+            .pagination {
+                display: flex; /* Use flexbox for alignment */
+                justify-content: center; /* Center items horizontally */
+                align-items: center; /* Center items vertically */
+                list-style: none; /* Remove bullet points */
+                padding: 0; /* Remove padding */
+                margin: 20px 0; /* Margin around the pagination */
+            }
+
+            .page-item {
+                margin: 0 10px; /* Spacing between items */
+            }
+
+            .btn-pagination {
+                background-color: #007BFF; /* Primary button color */
+                color: white; /* Text color */
+                border: none; /* Remove border */
+                padding: 10px 20px; /* Button padding */
+                border-radius: 5px; /* Rounded corners */
+                cursor: pointer; /* Change cursor on hover */
+                transition: background-color 0.3s; /* Transition effect */
+            }
+
+            /* Change color on hover */
+            .btn-pagination:hover {
+                background-color: #0056b3; /* Darker blue on hover */
+            }
+
+            /* Style for the active page */
+            .page-item.active h3 {
+                font-weight: bold; /* Bold text for active page */
+                color: #333; /* Color for active page number */
+                margin: 0; /* Remove default margin */
+            }
+             .rating {
+        display: flex;
+        justify-content: center; /* Center the stars */
+        cursor: pointer;
+        text-align: center;
+    }
+
+    .rating input {
+        display: none;
+    }
+
+    .rating label {
+        font-size: 25px;
+        color: #ccc;
+        margin-right: 10px;
+        transition: color 0.3s ease;
+    }
+
+    .rating input:checked ~ label {
+        color: #FFA500;
+    }
+
+    .rating label:hover,
+    .rating label:hover ~ label {
+        color: #FFA500;
+    }
+        </style>
+    </h:head>
+    <h:body>
+        <ui:insert name="header">
+            <ui:include src="../header.xhtml"/>
+        </ui:insert>
+        <section class="shop-banner-section" style="background-image:url(../resources/images/background/8.jpg);">
+            <div class="auto-container">
+                <div class="content-box">
+                    <div class="box-inner">
+                        <h2>Modern Furniture</h2>
+                        <div class="text">Leverage agile frameworks to provide a robust synopsis for high level overviews. Iterative approaches to corporate strategy foster collaborative.</div>
+                        <a href="../home.xhtml" class="theme-btn btn-style-one"><span class="txt">purchase now</span></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="shop-section">
+            <div class="auto-container">
+
+                <div class="row clearfix">
+                    <div class="col-md-12 search-filter-container">
+                        <p id="status"></p>
+                        <div class="search-container">
+                            <i class="fas fa-search search-icon" onclick="submitSearch()"></i>
+                            <!-- JSF form with proper submission -->
+                            <h:form id="searchForm">
+                                <h:inputText value="#{productsMB.searchKeyword}" id="searchQuery" class="search-input" />
+                                <h:commandButton value="Search" action="#{productsMB.updateProductList()}" style="display:none;" />
+                                <!-- Nút submit ẩn -->
+                                <button type="submit" style="display:none;"></button>
+                            </h:form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="shop-page section-padding-0-100">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-4 col-lg-3">
+                        <div class="shop-sidebar-area">
+                            <div class="shop-widget sort-by mb-50">
+                                <h4 class="widget-title">Price: </h4>
+                                <div class="widget-desc">
+                                    <h:form> 
+                                        <h:selectOneRadio value="#{productsMB.sortBy}" layout="pageDirection">
+                                            <f:selectItem itemLabel="Low to High" itemValue="price-asc" />
+                                            <f:selectItem itemLabel="High to Low" itemValue="price-desc" />
+                                            <f:selectItem itemLabel="A-Z" itemValue="name-asc" />
+                                            <f:selectItem itemLabel="Z-A" itemValue="name-desc" />
+                                        </h:selectOneRadio>
+                                        <h:commandButton value="Sort" action="#{productsMB.updateProductList}" />
+                                    </h:form>
+                                </div>
+                            </div>
+                            <br />
+                            <div class="search-filter-item1">
+                                <h4 class="widget-title">Subcategory: </h4>
+                                <div class="filter-container">
+                                    <h:form>
+                                        <h:selectManyCheckbox value="#{productsMB.selectedSubcategoryId}" layout="pageDirection">
+                                            <f:selectItems value="#{subcategoriesMB.showAllSubcategories()}" var="subcategory"
+                                                           itemLabel="#{subcategory.subcategoryName}" itemValue="#{subcategory.subcategoryID}" />
+                                        </h:selectManyCheckbox>
+                                        <h:commandButton value="Filter" action="#{productsMB.updateProductList}" />
+                                    </h:form>
+
+                                </div>
+                            </div>
+                            <div class="search-filter-item1">
+                                <h4 class="widget-title">Supplier: </h4>
+                                <div class="filter-container">
+                                    <h:form>
+                                        <h:selectManyCheckbox value="#{productsMB.selectSupplierId}" layout="pageDirection">
+                                            <f:selectItems value="#{supplierMB.showAllSuppliers()}" var="supplier"
+                                                           itemLabel="#{supplier.supplierName}" itemValue="#{supplier.supplierID}" />
+                                        </h:selectManyCheckbox>
+                                        <h:commandButton value="Filter" action="#{productsMB.updateProductList}" />
+                                    </h:form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 col-md-8 col-lg-9">
+                        <div class="shop-products-area">
+                            <div class="row ">
+                                <ui:repeat value="#{productsMB.filteredProducts}" var="item">
+                                    <div class="shop-item col-lg-3 col-md-6 col-sm-12">
+                                        <div class="inner-box">
+                                            <div class="image">
+                                                <h:graphicImage value="../admin/resources/image/products/#{item.image}" style="width:300px; height: 300px" />
+                                                <div class="overlay-box">
+                                                    <ul class="option-box">
+                                                        <li>
+                                                            <h:form>
+                                                                <h:commandLink action="#{cartProcessMB.addCartFromShop(item.productID)}" styleClass="fa fa-shopping-bag"></h:commandLink>
+                                                            </h:form>
+                                                        </li>
+                                                        <li>
+                                                            <h:form>
+                                                                <h:commandLink action="#{productsMB.addToFavoritesFromShop(item.productID)}" title="Add to Favorites" styleClass="fas fa-heart">
+                                                                    <h:outputText value="&#xf004;" escape="false"  />
+                                                                </h:commandLink>
+                                                            </h:form>
+                                                        </li>
+                                                        <li><a href="../admin/resources/image/products/#{item.image}" class="lightbox-image" data-fancybox="products"><span class="fa fa-search"></span></a></li>
+                                                    </ul>
+                                                </div>
+                                                <div class="tag-banner">New</div>
+                                            </div>
+                                            <h:form>
+                                                <div class="lower-content">
+                                                    <h3>
+                                                        <h:commandLink action="#{productsMB.findProductforDetail(item.productID)}">
+                                                            <h:outputText value="#{item.productName}" />
+                                                        </h:commandLink>
+                                                    </h3>
+                                                    <div class="rating-box">                                          
+                                                        <div class="rating">
+                                                            <ui:repeat value="#{[1,2,3,4,5]}" var="star">
+                                                                <span class="fa fa-star" style="color: #{feedbackMB.getAverageRatingForProduct(item.productID) >= star ? 'gold' : 'gray'};"></span>
+                                                            </ui:repeat>
+                                                        </div>
+                                                    </div>
+                                                    <br></br>                                                         
+                                                    <div class="price">
+                                                        <h:outputText value="#{item.unitPrice}" /> VND
+                                                    </div>        
+                                                </div>
+                                            </h:form>
+                                        </div>
+                                    </div>
+                                </ui:repeat>
+
+                            </div>
+                            <nav aria-label="Page">
+                                <ul class="pagination">
+                                    <li class="page-item">
+                                        <h:form>
+                                            <h:commandButton value="Previous" action="#{productsMB.goToPreviousPage()}"/>
+                                        </h:form>
+                                    </li>
+                                    <li class="page-item">
+                                        <h3>
+                                            <h:outputText value="#{productsMB.currentPage}"/>
+                                        </h3>
+                                    </li>
+                                    <li class="page-item">
+                                        <h:form>
+                                            <h:commandButton value="Next" action="#{productsMB.goToNextPage()}" />
+                                        </h:form>
+                                    </li>
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <ui:insert name="bottom">
+            <ui:include src="../footter.xhtml"/>
+        </ui:insert>
+        <script src="../resources/js/script.js"></script>
+    </h:body>
+</html>

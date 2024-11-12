@@ -1,0 +1,224 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Decor Vista</title>
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+
+        <link rel="stylesheet" href="../resources/css/profile.css" />
+        <style>
+            .containerForm {
+
+                border-radius: 15px;
+                padding: 2rem;
+                width: 100%;
+
+                box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            }
+
+            h2 {
+                color: var(--gold);
+                text-align: center;
+                margin-bottom: 2rem;
+                font-size: 2rem;
+                border-bottom: 2px solid var(--gold);
+                padding-bottom: 1rem;
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+                position: relative;
+            }
+
+            .form-group i {
+                position: absolute;
+                left: 1rem;
+                top: 70%;
+                transform: translateY(-50%);
+                color: var(--gold);
+            }
+
+            label {
+                display: block;
+                margin-bottom: 0.5rem;
+                color: var(--gold);
+                font-weight: 500;
+            }
+
+            input {
+                width: 100%;
+                padding: 0.8rem 1rem 0.8rem 2.5rem;
+                border: 1px solid var(--gold);
+                background: rgba(26, 26, 26, 0.8);
+                border-radius: 5px;
+                color: white;
+                font-size: 1rem;
+                transition: all 0.3s ease;
+            }
+
+            input:focus {
+                outline: none;
+                border-color: var(--dark-gold);
+                box-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+            }
+
+            .button-group {
+                display: flex;
+                gap: 1rem;
+                margin-top: 2rem;
+            }
+
+            button {
+                flex: 1;
+                padding: 1rem;
+                border: none;
+                border-radius: 5px;
+                font-size: 1rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            }
+
+            .save-btn {
+                background: var(--gold);
+                color: var(--black);
+                font-weight: bold;
+            }
+
+            .save-btn:hover {
+                background: var(--dark-gold);
+            }
+
+            .cancel-btn {
+                background: transparent;
+                border: 1px solid var(--gold);
+                color: var(--gold);
+            }
+
+            .cancel-btn:hover {
+                background: rgba(212, 175, 55, 0.1);
+            }
+
+            @media (max-width: 480px) {
+                .container {
+                    padding: 1rem;
+                }
+
+                .button-group {
+                    flex-direction: column;
+                }
+            }
+        </style>
+    </h:head>
+
+    <h:body>
+        <ui:insert name="header">
+            <ui:include src="../header.xhtml"/>
+        </ui:insert>
+        <section class="page-title" style="background-image:url(../resources/images/background/5.jpg)">
+            <div class="auto-container">
+                <h2>Profile</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="../home.xhtml">home</a></li>
+                    <li>Profile</li>
+                </ul>
+            </div>
+        </section>
+        <div class="container bootstrap snippets bootdey">
+            <div class="row">
+                <div class="profile-nav col-md-3">
+                    <div class="panel">
+                        <div class="user-heading round">
+                            <a href="#">
+                                <img src="../resources/images/profile.png" alt=""/>
+                            </a>
+                            <h1>#{loginMB.loggedInUsername}</h1>
+                            <p> #{loginMB.loggedInEmail}</p>
+                        </div>
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li class="active"><a href="#"> <i class="fa fa-user"></i> Profile</a></li>
+                            <!--              <li><a href="#"> <i class="fa fa-calendar"></i> Recent Activity <span class="label label-warning pull-right r-activity">9</span></a></li>
+                                          <li><a href="#"> <i class="fa fa-edit"></i> Edit profile</a></li>-->
+                        </ul>
+                    </div>
+                </div>
+                <div class="profile-info col-md-9">
+                    <div class="panel">
+
+                        <footer class="panel-footer">
+
+                            <ul class="nav nav-pills">
+                                <li>
+                                    <a href="#"><i class="fa fa-map-marker"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-camera"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class=" fa fa-film"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="fa fa-microphone"></i></a>
+                                </li>
+                            </ul>
+                        </footer>
+                    </div>
+                    <h:form>
+                        <div class="panel">
+                            <div class="bio-graph-heading">
+                                Welcome,  #{loginMB.loggedInUsername}. This is your profile page.
+                            </div>
+                            <div class="containerForm">
+                                <h:form>
+                                    <h:inputHidden value="#{userEditBean.user.userID}" />
+                                    <div class="form-group">
+                                        <label for="fullName">Full Name :</label>
+                                        <i class="fas fa-user"></i>
+                                        <h:inputText id="fullName" value="#{userEditBean.user.fullName}" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="userName">User Name :</label>
+                                        <i class="fas fa-user-circle"></i>
+                                        <h:inputText id="userName" value="#{userEditBean.user.userName}" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="password">Password :</label>
+                                        <i class="fas fa-lock"></i>
+                                        <h:inputText id="password" value="#{userEditBean.user.password}" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email :</label>
+                                        <i class="fas fa-envelope"></i>
+                                        <h:inputText id="email" value="#{userEditBean.user.email}" required="true" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Phone :</label>
+                                        <i class="fas fa-phone"></i>
+                                        <h:inputText id="phone" value="#{userEditBean.user.phone}" />
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Address :</label>
+                                        <i class="fas fa-home"></i>
+                                        <h:inputText id="address" value="#{userEditBean.user.address}" />
+                                    </div>
+                                    <div class="button-group">
+                                        <h:commandButton styleClass="cancel-btn" value="Save" action="#{userEditBean.updateUser}" />
+
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div>
+                    </h:form>
+
+                </div>
+            </div>
+        </div>
+        <ui:insert name="bottom">
+            <ui:include src="../footter.xhtml"/>
+        </ui:insert>
+        <script src='https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js'></script>
+    </h:body>
+
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Project Details</title>
+    </h:head>
+    <h:body>
+        <ui:insert name="header">
+            <ui:include src="../header.xhtml" />
+        </ui:insert>
+       <section class="page-title" style="background-image:url(../resources/images/background/5.jpg)">
+            <div class="auto-container">
+                <h2>Design Details</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="./projectDesignerList.xhtml">Inspiration Gallery</a></li>
+                    <li>Design Details</li>
+                </ul>
+            </div>
+        </section> 
+        <div class="auto-container">
+
+
+            <h:form id="projectDetailsForm">
+                <p:panel header="Project Details" style="margin: 20px;">
+                    <p:panelGrid columns="2" styleClass="ui-noborder">
+
+                        <h:outputText value="Project Name:" />
+                        <h:outputText value="#{projectDesignerMB.projectDesigner.projectName}" />
+
+                        <h:outputText value="Description:" />
+                        <h:outputText value="#{projectDesignerMB.projectDesigner.description}" />
+
+                        <h:outputText value="Designer:" />
+                        <h:outputText value="#{projectDesignerMB.projectDesigner.designerID.firstName}" />
+
+                        <h:outputText value="Image:" rendered="#{not empty projectDesignerMB.projectDesigner.image}"/>
+                       <h:graphicImage value="../resources/images/designer/project/#{projectDesignerMB.projectDesigner.image}" alt="Designer Image" styleClass="lightbox-image" />
+                    </p:panelGrid>
+
+                    <p:separator />
+                    <p:messages showDetail="true" closable="true"/>
+                    <p:commandButton value="Back to List"   
+                                     action="projectDesignerList?faces-redirect=true"
+                                     styleClass="ui-button-secondary"
+                                     style="margin-top: 20px;"/>
+                </p:panel>
+            </h:form>
+        </div>
+         <ui:insert name="bottom">
+        <ui:include src="../footter.xhtml"/>
+    </ui:insert>
+    </h:body>
+</html>

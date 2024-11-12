@@ -1,0 +1,287 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+
+        <style>
+            /* Center and style the form container */
+            #formProducts {
+                max-width: 900px;
+                margin: 20px auto;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+
+            /* Label styling */
+            #formProducts h\\:outputLabel {
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 5px;
+                display: inline-block;
+            }
+
+            /* Input, select, and file fields styling */
+            #formProducts h\\:inputText,
+            #formProducts h\\:selectOneMenu,
+            #formProducts h\\:inputFile {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            /* Error messages in red */
+            #formProducts h\\:message {
+                color: red;
+                font-size: 12px;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+
+            /* Button styling */
+            #formProducts h\\:panelGroup {
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            #formProducts h\\:commandButton {
+                padding: 8px 16px;
+                margin: 5px;
+                border: none;
+                border-radius: 4px;
+                font-weight: bold;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            /* Add and Reset button colors */
+            #formProducts h\\:commandButton[value="Add"] {
+                background-color: #28a745;
+            }
+
+            #formProducts h\\:commandButton[value="Reset"] {
+                background-color: #dc3545;
+            }
+
+            /* Button hover effect */
+            #formProducts h\\:commandButton:hover {
+                opacity: 0.9;
+            }
+            .success {
+                background-color: #d4edda; /* Nền màu xanh nhạt */
+                color: #155724; /* Màu chữ xanh đậm */
+                border: 1px solid #c3e6cb; /* Đường viền xanh nhạt */
+                border-radius: 5px; /* Bo góc */
+                padding: 10px 15px; /* Khoảng cách bên trong */
+                margin: 15px 0; /* Khoảng cách bên ngoài */
+                font-size: 16px; /* Kích thước chữ */
+                display: flex; /* Sử dụng flexbox để căn chỉnh nội dung */
+                align-items: center; /* Căn giữa nội dung theo chiều dọc */
+            }
+
+            .success:before {
+                content: '✅'; /* Thêm biểu tượng thành công */
+                margin-right: 10px; /* Khoảng cách giữa biểu tượng và nội dung */
+                font-size: 20px; /* Kích thước biểu tượng */
+            }
+        </style>
+    </h:head>
+
+
+    <h:body class="sb-nav-fixed">
+        <div id="top">
+            <ui:insert name="header">
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+        </div>
+        <div id="layoutSidenav">
+
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Products Management</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Products Management</li>
+                        </ol>
+
+
+                        <h:form id="formProducts" enctype="multipart/form-data">
+                            <h4>Add Products</h4>
+                            <h:panelGrid columns="1" cellpadding="5">
+   <h6 style="color: green;">The  ID is generated automatically. Please enter a number between 1 and 5 to generate the ID.</h6>
+                                <h:outputLabel for="productID" value="Product ID"/>
+                                <h:inputText id="productID" value="#{productsMB.products.productID}" style="width: 800px;height: 40px"/>
+                                <h:message for="productID"/>
+                                <!-- Product Name Field -->
+                                <h:outputLabel for="productName" value="Product Name"/>
+                                <h:inputText id="productName" value="#{productsMB.products.productName}" style="width: 800px;height: 40px"/>
+                                <h:message for="productName"/>
+
+                                <!-- Price Field -->
+                                <h:outputLabel for="price" value="Price"/>
+                                <h:inputText id="price" value="#{productsMB.products.unitPrice}" style="width: 800px;height: 40px"/>
+                                <h:message for="price"/>
+
+
+                                <h:outputLabel for="color" value="Color" />
+                                <h:selectOneMenu id="color" value="#{productsMB.products.color}" style="width: 800px; height: 40px">
+                                    <f:selectItem itemValue="black" itemLabel="Black" />
+                                    <f:selectItem itemValue="grey" itemLabel="Grey" />
+                                    <f:selectItem itemValue="white" itemLabel="White" />
+                                    <f:selectItem itemValue="yellow" itemLabel="Yellow" />
+                                    <f:selectItem itemValue="red" itemLabel="Red" />
+                                    <f:selectItem itemValue="blue" itemLabel="Blue" />
+                                    <f:selectItem itemValue="green" itemLabel="Green" />
+                                    <f:selectItem itemValue="orange" itemLabel="Orange" />
+                                    <f:selectItem itemValue="purple" itemLabel="Purple" />
+                                    <f:selectItem itemValue="pink" itemLabel="Pink" />
+                                    <f:selectItem itemValue="brown" itemLabel="Brown" />
+                                    <f:selectItem itemValue="cyan" itemLabel="Cyan" />
+                                    <f:selectItem itemValue="magenta" itemLabel="Magenta" />
+                                    <f:selectItem itemValue="other" itemLabel="Other" />
+                                </h:selectOneMenu>
+                                <h:message for="color" style="color: red;" />
+
+                                <!-- Size Field -->
+                                <h:outputLabel for="size" value="Size" />
+                                <h:selectOneMenu id="size" value="#{productsMB.products.size}" style="width: 800px; height: 40px">
+                                    <f:selectItem itemValue="1m x 1m" itemLabel="1m x 1m" />
+                                    <f:selectItem itemValue="1m x 2m" itemLabel="1m x 2m" />
+                                    <f:selectItem itemValue="1.5m x 2m" itemLabel="1.5m x 2m" />
+                                    <f:selectItem itemValue="2m x 2m" itemLabel="2m x 2m" />
+                                    <f:selectItem itemValue="2m x 3m" itemLabel="2m x 3m" />
+                                    <f:selectItem itemValue="3m x 3m" itemLabel="3m x 3m" />
+                                    <f:selectItem itemValue="4m x 4m" itemLabel="4m x 4m" />
+                                    <f:selectItem itemValue="custom" itemLabel="Custom Size" />
+                                </h:selectOneMenu>
+                                <h:message for="size" style="color: red;" />
+                                <!-- Image Upload -->
+                                <h:outputLabel for="image" value="Image"/>
+                                <h:inputFile id="image" value="#{productsMB.image}"/>
+                                <h:message for="image"/>
+                                <!-- Description Field -->
+                                <h:outputLabel for="description" value="Description"/>
+                                <h:inputText id="description" value="#{productsMB.products.description}" style="width: 800px;height: 40px"/>
+                                <h:message for="description"/>
+
+                                <!-- Subcategory Dropdown -->
+                                <h:outputLabel for="subcategory" value="Subcategory"/>
+                                <h:selectOneMenu value="#{productsMB.subcategoryID}" id="subcategories" style="width: 800px;height: 40px">
+                                    <f:selectItems value="#{subcategoriesMB.showAllSubcategories()}" var="itemSub"
+                                                   itemValue="#{itemSub.subcategoryID}"
+                                                   itemLabel="#{itemSub.subcategoryID} #{itemSub.subcategoryName}"/>
+                                </h:selectOneMenu>
+                                <h:message for="subcategory"/>
+
+                                <!-- Supplier Dropdown -->
+                                <h:outputLabel for="supplier" value="Supplier"/>
+                                <h:selectOneMenu value="#{productsMB.supplierID}" id="suppliers" style="width: 800px;height: 40px">
+                                    <f:selectItems value="#{supplierMB.showAllSuppliers()}" var="itemSup"
+                                                   itemValue="#{itemSup.supplierID}"
+                                                   itemLabel="#{itemSup.supplierID} #{itemSup.supplierName}"/>
+                                </h:selectOneMenu>
+                                <h:message for="supplier"/>
+
+                                <!-- Buttons -->
+                                <h:panelGroup>
+                                    <h:commandButton action="#{productsMB.addProducts()}" value="Add" type="submit"/>
+                                    <h:commandButton action="#{productsMB.updateProducts()}" value="Update" type="submit"/>
+                                    <h:commandButton action="#{productsMB.resetForm()}" value="Reset" type="submit"/>
+                                </h:panelGroup>
+                            </h:panelGrid>
+                        </h:form>
+                        <h:messages globalOnly="true" styleClass="success" />
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Products Table
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Color</th>
+                                            <th>Size</th>
+                                            <th>Image</th>
+
+                                            <th>Description</th>
+                                            <th>Subcategory</th>
+                                            <th>Supplier</th>
+
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Product ID</th>
+                                            <th>Product Name</th>
+                                            <th>Price</th>
+                                            <th>Color</th>
+                                            <th>Size</th>
+                                            <th>Image</th>
+
+                                            <th>Description</th>
+                                            <th>Subcategory</th>
+                                            <th>Supplier</th>
+
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <c:forEach items="#{productsMB.showAllProducts()}" var="item1">
+                                            <tr>
+                                                <td><h:outputText value="#{item1.productID}" /></td>
+                                                <td><h:outputText value="#{item1.productName}" /></td>
+                                                <td><h:outputText value="#{item1.unitPrice}" /></td>
+                                                <td><h:outputText value="#{item1.color}" /></td>
+                                                <td><h:outputText value="#{item1.size}" /></td>
+                                                <td>
+                                                    <h:graphicImage value="resources/image/products/#{item1.image}" width="100px"/>
+                                                </td>
+                                                <td><h:outputText value="#{item1.description}" /></td>
+                                                <td><h:outputText value="#{item1.subcategoryID.subcategoryName}" /></td>
+                                                <td><h:outputText value="#{item1.supplierID.supplierName}" /></td>
+                                                <td>
+                                                    <h:form>
+                                                        <h:commandButton image="resources/image/e.png" action="#{productsMB.findProductforUpdate(item1.productID)}" style="width: 30px" type="submit" />
+                                                    </h:form>
+                                                </td>
+                                                <td>
+                                                    <h:form>
+                                                        <h:commandButton image="resources/image/delete.png" action="#{productsMB.deleteProducts(item1.productID)}" style="width: 30px" type="submit"  onclick="return confirm('Are you sure you want to delete this product?');" />
+                                                    </h:form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+            </div>
+        </div>
+        <h:outputScript target="body">
+            var alertMessage = "#{flash.alertMessage}";
+            if (alertMessage) {
+            alert(alertMessage);
+            }
+        </h:outputScript>
+        <script src="resources/js/scripts.js"/>
+        <script src="resources/js/datatablesSimple.js"/>
+    </h:body>
+</html>

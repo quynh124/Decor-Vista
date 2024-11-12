@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Designer Availability Calendar</title>
+    <!-- External CSS -->
+    <link rel="stylesheet" href="../resources/css/main.css" />
+    <link rel="stylesheet" href="../resources/css/bootstrap.css" />
+    <link rel="stylesheet" href="../resources/css/style.css" />
+    <link rel="stylesheet" href="../resources/css/responsive.css" />
+    <link rel="stylesheet" href="../resources/css/owl.css" />
+    <link rel="stylesheet" href="../resources/css/jquery-ui.css" />
+    <link rel="stylesheet" href="../resources/css/jquery.bootstrap-touchspin.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css" />
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css" />
+    <link rel="stylesheet" href="../resources/css/calendar.css" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="../resources/images/favicon.png" type="image/x-icon" />
+    <link rel="icon" href="../resources/images/favicon.png" type="image/x-icon" />
+
+    <!-- External JS Libraries -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
+
+    <!-- Local JS Libraries -->
+    <script src="../resources/js/jquery.js"></script>
+    <script src="../resources/js/popper.min.js"></script>
+    <script src="../resources/js/jquery-ui.js"></script>
+    <script src="../resources/js/bootstrap.min.js"></script>
+    <script src="../resources/js/jquery.fancybox.js"></script>
+    <script src="../resources/js/owl.js"></script>
+    <script src="../resources/js/wow.js"></script>
+    <script src="../resources/js/isotope.js"></script>
+    <script src="../resources/js/appear.js"></script>
+    <script src="../resources/js/scrollbar.js"></script>
+
+    <!-- Meta Tags -->
+    <meta name="keywords" content="calendar, events, reminders, javascript, html, css" />
+</h:head>
+
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="header.xhtml" />
+    </ui:insert>
+<!-- style="
+    padding-bottom: 400px;"-->
+    <div class="container" >
+        <div class="left">
+            <!-- Calendar -->
+            <div class="calendar">
+                <div class="month">
+                    <i class="fas fa-angle-left prev"></i>
+                    <div class="date">December 2015</div>
+                    <i class="fas fa-angle-right next"></i>
+                </div>
+                <div class="weekdays">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                </div>
+                <div class="days"></div>
+                <div class="goto-today">
+                    <div class="goto">
+                        <input type="text" placeholder="mm/yyyy" class="date-input" />
+                        <button class="goto-btn">Go</button>
+                    </div>
+                    <button class="today-btn">Today</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="right">
+            <!-- Today Event -->
+            <div class="today-date">
+                <div class="event-day">Wed</div>
+                <div class="event-date">12th December 2022</div>
+            </div>
+            <div class="events"></div>
+
+            <!-- Add Event -->
+            <div class="add-event-wrapper">
+                <div class="add-event-header">
+                    <div class="title">Add Event</div>
+                    <i class="fas fa-times close"></i>
+                </div>
+                <div class="add-event-body">
+                    <div class="add-event-input">
+                        <input type="text" placeholder="Event Name" class="event-name" />
+                    </div>
+                    <div class="add-event-input">
+                        <input type="text" placeholder="Event Time From" class="event-time-from" />
+                    </div>
+                    <div class="add-event-input">
+                        <input type="text" placeholder="Event Time To" class="event-time-to" />
+                    </div>
+                </div>
+                <div class="add-event-footer">
+                    <button class="add-event-btn">Add Event</button>
+                </div>
+            </div>
+            
+        <button class="add-event">
+            <i class="fas fa-plus"></i>
+        </button>
+        </div>
+
+    </div>
+<!--    <div class="credits">
+      <p>
+       <ui:insert name="bottom">
+            <ui:include src="footer.xhtml" />
+        </ui:insert>
+      </p>
+    </div>-->
+
+    <!-- Footer Section -->
+    
+
+    <!-- Calendar JS -->
+    <script src="../resources/js/calendar.js"></script>
+</h:body>
+
+</html>

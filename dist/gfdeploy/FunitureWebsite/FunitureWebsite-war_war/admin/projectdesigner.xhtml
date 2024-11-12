@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+         <title>Decor Vista Admin</title>
+       
+         <style></style>
+    </h:head>
+
+
+    <h:body class="sb-nav-fixed">
+          <div id="top">
+            <ui:insert name="header">
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+        </div>
+        
+        <div id="layoutSidenav">
+           
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Project Designer Management</h1>
+                       
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Project Designer Table
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Project ID</th>
+                                            <th>Designer </th>
+                                            <th>Project Name</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
+                                            
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Project ID</th>
+                                            <th>Designer </th>
+                                            <th>Project Name</th>
+                                            <th>Description</th>
+                                            <th>Image</th>
+                                          
+                                            <th>Delete</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <c:forEach items="#{projectDesignerMB.showAllProjectDesigner()}" var="project">
+                                            <tr>
+                                                <td><h:outputText value="#{project.projectID}" /></td>
+                                                <td><h:outputText value="#{project.designerID.firstName} #{project.designerID.lastName}" /></td>
+                                                <td><h:outputText value="#{project.projectName}" /></td>
+                                                <td><h:outputText value="#{project.description}" /></td>
+                                                <td>
+                                                    <h:graphicImage value="../resources/images/designer/project/#{project.image}" width="100" height="100"/>
+                                                </td>
+                                              
+                                                <td>
+                                                    <h:form>
+                                                        <h:commandButton image="resources/image/delete.png" action="#{projectDesignerMB.deleteProject(project.projectID)}"  type="submit" style="width: 30px"  onclick="return confirm('Are you sure you want to delete this project?');"/>
+                                                    </h:form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+
+            </div>
+        </div>
+ <h:outputScript target="body">
+        var alertMessage = "#{flash.alertMessage}";
+        if (alertMessage) {
+        alert(alertMessage);
+        }
+    </h:outputScript>
+        <script src="resources/js/scripts.js"/>
+        <script src="resources/js/datatablesSimple.js"/>
+    </h:body>
+</html>

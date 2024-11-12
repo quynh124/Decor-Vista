@@ -1,0 +1,276 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Home Designer</title>
+        <link name="https://code.jquery.com/jquery-3.5.1.min.js" />
+        <link name="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" />
+    </h:head>
+    <h:body>
+        <div class="page-wrapper">
+            <ui:insert name="header">
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+           <section class="main-slider">
+                <div class="slider-box">
+
+                    <!-- Banner Carousel -->
+                    <div class="banner-carousel owl-theme owl-carousel">
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="image-layer" style="background-image:url(../resources/images/main-slider/1.jpg)"></div>
+                            <div class="auto-container">
+                                <div class="content">
+                                    <h2>We make dream <br></br> home a reality</h2>
+                                    <div class="text">Since 1989, We inspired fragments of your life stories with the finest kitchens, wardrobes, bedroom sets and living  dining.</div>
+                                    <div class="btns-box">
+                                        <a href="#" class="theme-btn btn-style-one"><span class="txt">Know more</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="image-layer" style="background-image:url(../resources/images/main-slider/2.jpg)"></div>
+                            <div class="auto-container">
+                                <div class="content">
+                                    <h2>Designs Benefitting <br></br> Your Persona</h2>
+                                    <div class="text">Since 1989, We inspired fragments of your life stories with the finest kitchens, wardrobes, bedroom sets and living  dining.</div>
+                                    <div class="btns-box">
+                                        <a href="#" class="theme-btn btn-style-one"><span class="txt">Know more</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="image-layer" style="background-image:url(../resources/images/main-slider/3.jpg)"></div>
+                            <div class="auto-container">
+                                <div class="content">
+                                    <h2>Solution for <br></br> Modern Kitchen</h2>
+                                    <div class="text">Since 1989, We inspired fragments of your life stories with the finest kitchens, wardrobes, bedroom sets and living  dining.</div>
+                                    <div class="btns-box">
+                                        <a href="#" class="theme-btn btn-style-one"><span class="txt">Know more</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- End Banner Section -->
+
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="auto-container">
+
+                    <!-- Title Box -->
+                    <div class="title-box">
+                        <h2>We provide the best suggestions for Interior Designing of a given space so  that it can become truly a “living space”.</h2>
+                    </div>
+
+                    <div class="row clearfix">
+
+                        <!-- Content Column -->
+                        <div class="content-column col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <h2>Welcome to DecorVista Best Interior Designer</h2>
+                                <div class="text">Bring to the table win-win survival strategies to ensure proactive domination. At the end of the day, going forward, a new normal that has evolved from generation X is on the runway heading towards.</div>
+                                <ul class="list-style-three">
+                                    <li>5 years material warranty</li>
+                                    <li>2500 projects has been completed</li>
+                                    <li>500+ designers under one roof</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <!-- Video Column -->
+                        <div class="video-column col-lg-6 col-md-12 col-sm-12">
+                            <div class="inner-column">
+
+                                <div class="video-box">
+                                    <img src="../resources/images/resource/video-img-2.jpg" alt="" />
+                                    <a href="https://www.youtube.com/watch?v=kxPCFljwJws" class="lightbox-image overlay-box"><span class="flaticon-play-button"><i class="ripple"></i></span></a>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section class="services-section-two">
+                <div class="auto-container">
+                    <!-- Sec Title -->
+                    <div class="sec-title">
+                        <h2>All Brand</h2>
+                        <div class="text">This is all brand of store!!!</div>
+                    </div>
+
+                    <div class="row clearfix">
+                        <c:forEach items="#{supplierMB.limitedSuppliers}" var="item">
+                            <!-- Service Block -->
+                            <div class="service-block-two col-lg-4 col-md-6 col-sm-12">
+                                <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                    <div class="content">
+                                        <div class="icon-box">
+                                            <span class="icon flaticon-house-1"></span>
+                                        </div>
+                                        <h3><a href="#{item.url}"><h:outputText value="#{item.supplierName}"/></a></h3>
+                                        <div class="text"><h:outputText value="#{item.email}"/></div>
+                                        <div class="text"><h:outputText value="#{item.phone}"/></div>
+                                        <a href="#{item.url}" class="read-more">Read more</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </div>
+                </div>
+            </section>
+            <!-- End Services Section Two -->
+
+            <section class="project-section">
+                <div class="auto-container">
+                    <!-- Title Box -->
+                    <div class="title-box">
+                        <h2>Product Categories</h2>
+                    </div>
+                </div>
+
+                <div class="outer-container">
+                    <div class="sortable-masonry">
+                        <!-- Filter -->
+                        <div class="filters clearfix">
+                            <ul class="filter-tabs filter-btns text-center clearfix">
+                                <li class="active filter" data-role="button" data-filter="*">All Categories</li>
+                                <ui:repeat value="#{categoryMB.showAllCategories()}" var="category">
+                                    <li class="filter" data-role="button" data-filter=".#{category.categoryID}">
+                                        <h:form>
+                                            <h:commandLink value="#{category.categoryName}">
+                                                <f:ajax listener="#{subcategoriesMB.findCategory(category.categoryID)}" render="subcategoryContainer" />
+                                            </h:commandLink>
+                                        </h:form>
+                                    </li>
+                                </ui:repeat>
+                            </ul>
+                        </div>
+
+                        <div class="items-container row clearfix" id="subcategoryContainer">
+                            <ui:repeat value="#{subcategoriesMB.filteredSubcategories}" var="subcategory">
+                                <div class="gallery-item masonry-item #{subcategory.categoryID.categoryID}">
+                                    <div class="inner-box">
+                                        <figure class="image-box">
+                                            <h:graphicImage value="../admin/resources/image/sub#{subcategory.image}" alt="" style="width:350px; height: 350px"/>
+                                            <!-- Overlay Box -->
+                                            <div class="overlay-box">
+                                                <div class="overlay-inner">
+                                                    <div class="content">
+                                                        <h3><a href="#">#{subcategory.subcategoryName}</a></h3>
+                                                        <a href="../admin/resources/image/sub#{subcategory.image}" data-fancybox="gallery-1" data-caption="#{subcategory.subcategoryName}" class="link">
+                                                            <span class="icon flaticon-magnifying-glass-1"></span>
+                                                        </a>
+                                                        <a href="" class="link">
+                                                            <span class="icon flaticon-unlink"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="mission-section">
+                <div class="auto-container">
+                    <div class="row clearfix">
+
+                        <!-- Image Column -->
+                        <div class="image-column col-xl-3 col-lg-4 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <div class="image">
+                                    <img src="../resources/images/resource/mission.jpg" alt="" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Content Column -->
+                        <div class="content-column col-xl-9 col-lg-8 col-md-12 col-sm-12">
+                            <div class="inner-column">
+                                <h2>Our Company Mission</h2>
+                                <div class="bold-text">we believe that interior design is more than great functionality and  beautiful aesthetics.</div>
+                                <div class="text">WThe aesthetics and functional aspects are the primary elements of a smart interior design. We as the prominent Interior Design Consultant in Noida keep these elements at our highest priority. We provide the best suggestions for Interior Designing of a given space</div>
+                                <h3>Our Interior designers help you for classic look…</h3>
+                                <div class="row clearfix">
+                                    <div class="column col-lg-6 col-md-6 col-sm-12">
+                                        <ul class="list-style-two">
+                                            <li>-  Best Design Consultancy</li>
+                                            <li>-  Architect Designer</li>
+                                            <li>-  Turnkey Projects</li>
+                                        </ul>
+                                    </div>
+                                    <div class="column col-lg-6 col-md-6 col-sm-12">
+                                        <ul class="list-style-two">
+                                            <li>-  Residential Designs</li>
+                                            <li>-  Corporate Designs</li>
+                                            <li>-  Commercial Designs</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+           
+
+            <section class="call-to-action-section" style="background-image: url(../resources/images/background/1.jpg)">
+                <div class="auto-container">
+                    <h2>Think Interior. Think DecorVista</h2>
+                    <div class="text">Interiors for all styles and budgets, Choose from thousands of designs. Heart your favorites to shortlist.</div>
+                    <a href="contact.html" class="theme-btn btn-style-two"><span class="txt">contact us</span></a>
+                </div>
+            </section>
+
+
+            <ui:insert name="bot">
+                <ui:include src="footer.xhtml"/>
+            </ui:insert>
+        </div>
+        <script>
+            $(document).ready(function () {
+                // Initialize Isotope
+                var $grid = $('.items-container').isotope({
+                    itemSelector: '.gallery-item',
+                    layoutMode: 'fitRows'
+                });
+
+                // Filter items on button click
+                $('.filter-btns').on('click', 'li', function () {
+                    var filterValue = $(this).attr('data-filter');
+                    $grid.isotope({filter: filterValue});
+                    $('.filter').removeClass('active');
+                    $(this).addClass('active');
+                });
+            });
+        </script> 
+        <script src="../resources/js/script.js"/>   
+    </h:body>
+</html>

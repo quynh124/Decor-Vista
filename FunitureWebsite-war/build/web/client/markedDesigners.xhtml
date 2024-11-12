@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+    <title>Marked Designers</title>
+    <h:outputStylesheet name="styles.css" />
+     <style>
+        :root {
+            --primary-gold: #FFD700;
+            --dark-gold: #B8860B;
+            --black: #1A1A1A;
+            --white: #FFFFFF;
+            --light-gray: #F5F5F5;
+            --hover-gray: #f0f0f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: var(--black);
+            line-height: 1.6;
+        }
+
+        .page-title {
+            background-color: var(--black);
+            padding: 150px 0;
+            text-align: center;
+            position: relative;
+            margin-bottom: 50px;
+        }
+
+        .page-title::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('../resources/images/background/interior-pattern.png') center/cover;
+            opacity: 0.1;
+        }
+
+        .page-title h2 {
+            font-size: 3em;
+            color: var(--primary-gold);
+            margin: 0;
+            position: relative;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .page-title::after {
+            content: '';
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-gold);
+        }
+
+        .auto-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .marked-designers-section {
+            padding: 50px 0;
+        }
+
+        .designers-table {
+            width: 100%;
+            background: var(--white);
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background-color: var(--black);
+            color: var(--primary-gold);
+            padding: 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-transform: uppercase;
+        }
+
+        .designers-row {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+
+        .designers-row:hover {
+            background-color: var(--hover-gray);
+            transform: translateX(10px);
+        }
+
+        .designers-row:last-child {
+            border-bottom: none;
+        }
+
+        .designer-name {
+            font-weight: 500;
+            color: var(--black);
+        }   
+
+        .designer-phone {
+            color: var(--dark-gold);
+        }
+
+        .delete-btn {
+            background-color: var(--black);
+            color: var(--primary-gold);
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .delete-btn:hover {
+            background-color: #ff3333;
+            color: var(--white);
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(255, 51, 51, 0.3);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            color: #666;
+        }
+
+        .empty-state i {
+            font-size: 48px;
+            color: var(--primary-gold);
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .designers-row {
+                grid-template-columns: 1fr;
+                gap: 10px;
+                text-align: center;
+            }
+
+            .header {
+                display: none;
+            }
+
+            .designer-name::before {
+                content: 'Designer: ';
+                font-weight: bold;
+                color: var(--dark-gold);
+            }
+
+            .designer-phone::before {
+                content: 'Phone: ';
+                font-weight: bold;
+                color: var(--dark-gold);
+            }
+
+            .delete-btn {
+                width: 100%;
+                margin-top: 10px;
+            }
+        }
+
+        /* Animation for new items */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .designers-row {
+            animation: fadeIn 0.5s ease forwards;
+        }
+    </style>
+</h:head>
+
+<h:body>
+    <ui:insert name="header">
+        <ui:include src="../header.xhtml" />
+    </ui:insert>
+
+    <section class="page-title">
+        <div class="auto-container">
+            <h2>Marked Designers</h2>
+        </div>
+    </section>
+
+    <section class="marked-designers-section">
+        <div class="auto-container">
+    <div class="designers-table">
+        <h:form>
+            <!-- Header Row -->
+            <div class="designers-row">
+                <div class="header"><h:outputText value="Designer Name" /></div>
+                <div class="header"><h:outputText value="Phone" /></div>
+                <div class="header"><h:outputText value="Actions" /></div>
+            </div>
+            
+            <!-- Designers List -->
+            <ui:repeat value="#{designerMB.getMarkedDesigners()}" var="designer">
+                <div class="designers-row">
+                    <div class="designer-name">
+                        <h:outputText value="#{designer.firstName} #{designer.lastName}" />
+                    </div>
+                    <div class="designer-phone">
+                        <h:outputText value="#{designer.phone}" />
+                    </div>
+                    <div class="action-column">
+                        <h:commandButton value="Delete" 
+                                       action="#{designerMB.removeDesigner(designer)}"
+                                       onclick="return confirm('Are you sure you want to delete this designer?');"
+                                       styleClass="delete-btn" />
+                    </div>
+                </div>
+            </ui:repeat>
+
+            <!-- Empty State -->
+            <h:panelGroup rendered="#{empty designerMB.getMarkedDesigners()}" 
+                          styleClass="empty-state">
+                <i class="fa fa-bookmark"></i>
+                <h3>No Marked Designers</h3>
+                <p>You haven't marked any designers yet.</p>
+            </h:panelGroup>
+        </h:form>
+    </div>
+</div>
+    </section>
+ <ui:insert name="bottom">
+        <ui:include src="../footter.xhtml"/>
+    </ui:insert>
+    <script src="../resources/js/jquery.js"></script>
+    <script src="../resources/js/popper.min.js"></script>
+    <script src="../resources/js/bootstrap.min.js"></script>
+</h:body>
+</html>

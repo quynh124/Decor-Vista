@@ -1,0 +1,101 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Decor Vista Admin</title>
+       
+      
+    </h:head>
+
+
+    <h:body class="sb-nav-fixed">
+         <div id="top">
+            <ui:insert name="header">
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+        </div>
+         <div id="layoutSidenav">
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Consultation Management</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Consultation Management</li>
+                        </ol>
+
+
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Consultation Table
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Consultation ID</th>
+
+                                            <th>Designer </th>
+                                            <th>User </th>
+                                            <th>Day</th>
+                                            <th>Scheduled_datetime</th>
+                                            <th>Notes</th>
+
+
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Consultation ID</th>
+
+                                            <th>Designer </th>
+                                            <th>User </th>
+                                            <th>Day</th>
+                                            <th>Scheduled_datetime</th>
+                                            <th>Notes</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <c:forEach items="#{consultationsMB.showAllConsultation1()}" var="item1">
+                                            <tr>
+                                                <td><h:outputText value="#{item1.consultationID}" /></td>
+                                                <td><h:outputText value="#{item1.designerID.firstName} #{item1.designerID.lastName}" /></td>
+                                                <td><h:outputText value="#{item1.userID.fullName}" /></td>
+                                                <td><h:outputText value="#{item1.day}" /></td>
+                                                <td><h:outputText value="#{item1.scheduleddatetime}" /></td>
+
+                                                <td><h:outputText value="#{item1.notes}" /></td>
+
+
+                                                <td>
+                                                    <h:form>
+                                                        <h:commandButton image="resources/image/delete.png" action="#{consultationsMB.deleteConsultations(item1.consultationID)}" style="width: 30px" type="submit"  onclick="return confirm('Are you sure you want to delete this consultation?');" />
+                                                    </h:form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <script src="resources/js/scripts.js"/>
+        <script src="resources/js/datatablesSimple.js"/>
+         <h:outputScript target="body">
+        var alertMessage = "#{flash.alertMessage}";
+        if (alertMessage) {
+        alert(alertMessage);
+        }
+    </h:outputScript>
+    </h:body>
+    
+</html>

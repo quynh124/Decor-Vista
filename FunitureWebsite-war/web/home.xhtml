@@ -1,0 +1,402 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>DecorVista - Interior and Home Renovation HTML Template </title>
+        <link name="https://code.jquery.com/jquery-3.5.1.min.js" />
+        <link name="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" />
+
+
+
+
+    </h:head>
+
+    <h:body>
+        <div class="page-wrapper">
+            <div id="top">
+                <ui:insert name="header">
+                    <ui:include src="header.xhtml"/>
+                </ui:insert>
+            </div>
+            <section class="main-slider">
+                <div class="slider-box">
+
+                    <!-- Banner Carousel -->
+                    <div class="banner-carousel owl-theme owl-carousel">
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="image-layer" style="background-image:url(resources/images/main-slider/1.jpg)"></div>
+                            <div class="auto-container">
+                                <div class="content">
+                                    <h2>We make dream <br></br> home a reality</h2>
+                                    <div class="text">Since 1989, We inspired fragments of your life stories with the finest kitchens, wardrobes, bedroom sets and living  dining.</div>
+                                    <div class="btns-box">
+                                        <a href="#" class="theme-btn btn-style-one"><span class="txt">Know more</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="image-layer" style="background-image:url(resources/images/main-slider/2.jpg)"></div>
+                            <div class="auto-container">
+                                <div class="content">
+                                    <h2>Designs Benefitting <br></br> Your Persona</h2>
+                                    <div class="text">Since 1989, We inspired fragments of your life stories with the finest kitchens, wardrobes, bedroom sets and living  dining.</div>
+                                    <div class="btns-box">
+                                        <a href="#" class="theme-btn btn-style-one"><span class="txt">Know more</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slide -->
+                        <div class="slide">
+                            <div class="image-layer" style="background-image:url(resources/images/main-slider/3.jpg)"></div>
+                            <div class="auto-container">
+                                <div class="content">
+                                    <h2>Solution for <br></br> Modern Kitchen</h2>
+                                    <div class="text">Since 1989, We inspired fragments of your life stories with the finest kitchens, wardrobes, bedroom sets and living  dining.</div>
+                                    <div class="btns-box">
+                                        <a href="#" class="theme-btn btn-style-one"><span class="txt">Know more</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+            <section class="services-section-two">
+                <a class="carousel-control-prev" href="#brandCarousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" style="background-color: #d4af37; width: 35px;height: 35px" aria-hidden="true"></span>
+                    <span class="sr-only" >Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#brandCarousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" style="background-color: #d4af37; width: 35px;height: 35px" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                <div class="auto-container">
+                    <!-- Sec Title -->
+                    <div class="sec-title">
+                        <h2>All Brand</h2>
+                        <div class="text">
+                            <p>Welcome to our furniture store! We take pride in being a hub for top brands in the furniture industry, offering you high-quality products with unique designs. Our suppliers are carefully selected, ranging from well-known international brands to emerging names, all committed to providing durable, stylish products that align with modern trends.</p>
+                        </div>
+                    </div>
+                    <!-- Carousel -->
+                    <div id="brandCarousel" class="carousel slide" data-ride="carousel">
+                        <div class="carousel-inner" id="carouselInner">
+                            <c:set var="groupedSuppliers" value="#{supplierMB.groupedSuppliers}" />
+
+                            <c:forEach items="${groupedSuppliers}" var="supplierGroup" varStatus="groupStatus">
+                                <div class="carousel-item ${groupStatus.index == 0 ? 'active' : ''}">
+                                    <div class="row">
+                                        <c:forEach items="${supplierGroup}" var="item">
+                                            <div class="service-block-two col-lg-4 col-md-6 col-sm-12">
+                                                <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                                    <div class="content">
+                                                        <div class="icon-box">
+                                                            <span class="icon flaticon-house-1"></span>
+                                                        </div>
+                                                        <h3><a href="#{item.url}"><h:outputText value="#{item.supplierName}"/></a></h3>
+                                                        <div class="text"><h:outputText value="#{item.email}"/></div>
+                                                        <div class="text"><h:outputText value="#{item.phone}"/></div>
+                                                        <a href="#{item.url}" class="read-more">Read more</a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </c:forEach>
+                                    </div> <!-- Đóng row -->
+                                </div> <!-- Đóng carousel-item -->
+                            </c:forEach>
+                        </div> 
+
+                    </div>
+                </div>
+            </section>
+            <section class="project-section">
+                <div class="auto-container">
+                    <!-- Title Box -->
+                    <div class="title-box">
+                        <h2>Product Categories</h2>
+                    </div>
+                </div>
+
+                <div class="outer-container">
+                    <div class="sortable-masonry">
+                        <!-- Filter -->
+                        <div class="filters clearfix">
+                            <ul class="filter-tabs filter-btns text-center clearfix">
+                                <li class="active filter" data-role="button" data-filter="*">All Categories</li>
+                                <ui:repeat value="#{categoryMB.showAllCategories()}" var="category">
+                                    <li class="filter" data-role="button" data-filter=".#{category.categoryID}">
+                                        <h:form>
+                                            <h:commandLink value="#{category.categoryName}">
+                                                <f:ajax listener="#{subcategoriesMB.findCategory(category.categoryID)}" render="subcategoryContainer" />
+                                            </h:commandLink>
+                                        </h:form>
+                                    </li>
+                                </ui:repeat>
+                            </ul>
+                        </div>
+
+                        <div class="items-container row clearfix" id="subcategoryContainer">
+                            <ui:repeat value="#{subcategoriesMB.filteredSubcategories}" var="subcategory">
+                                <div class="gallery-item masonry-item #{subcategory.categoryID.categoryID}">
+                                    <div class="inner-box">
+                                        <figure class="image-box">
+                                            <h:graphicImage value="./admin/resources/image/sub#{subcategory.image}" alt="" style="width:350px; height: 350px"/>
+                                            <!-- Overlay Box -->
+                                            <div class="overlay-box">
+                                                <div class="overlay-inner">
+                                                    <div class="content">
+                                                        <h3><a href="#">#{subcategory.subcategoryName}</a></h3>
+                                                        <a href="./admin/resources/image/sub#{subcategory.image}" data-fancybox="gallery-1" data-caption="#{subcategory.subcategoryName}" class="link">
+                                                            <span class="icon flaticon-magnifying-glass-1"></span>
+                                                        </a>
+                                                        <a href="" class="link">
+                                                            <span class="icon flaticon-unlink"></span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </figure>
+                                    </div>
+                                </div>
+                            </ui:repeat>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <section class="fluid-section-one">
+                <div class="outer-container clearfix">
+
+                    <!-- Content Column -->
+                    <div class="content-column">
+                        <div class="content-box">
+                            <h2>Home design made easy</h2>
+                            <div class="text">To give you a home that lasts, we bring you only the best in everything — quality raw materials, state-of-the-art manufacturing, rigorous quality checks, professional installations, and transparent prices.</div>
+                            <ul class="list-style-one">
+                                <li>Whole Home Interior</li>
+                                <li>Modular Kitchen and Wardrobe</li>
+                                <li>Furniture, Decor, and more</li>
+                                <li>Post-surgery, including cosmetic, joint replacement, or heart surgery</li>
+                                <li>Chronic conditions, such as diabetes, COPD, or cancer</li>
+                                <li>On-Site Expertise</li>
+                            </ul>
+                            <div class="bold-text">Design your home, right here at Decor Vista <br></br></div>
+                        </div>
+                    </div>
+
+                    <!-- Image Column -->
+                    <div class="inner-column">
+                        <div class="image-column" style="background-image: url(resources/images/resource/video-img.jpg);">
+                            <a href="https://www.youtube.com/watch?v=SXZXtD60t2g" class="overlay-link lightbox-image">
+                                <div class="icon-box">
+                                    <span class="icon flaticon-play-button"></span>
+                                    <i class="ripple"></i>
+                                </div>
+                            </a></div>
+                    </div>
+                    <!-- End Image Column -->
+
+                </div>
+            </section>
+
+            <!-- Featured Section -->
+            <section class="featured-section" style="background-image: url(resources/images/background/2.jpg)">
+                <div class="auto-container">
+                    <!-- Title Box -->
+                    <div class="title-box">
+                        <h2>Our Work Process</h2>
+                    </div>
+
+                    <div class="row clearfix">
+
+                        <!-- Feature Block -->
+                        <div class="feature-block col-lg-3 col-md-6 col-sm-12">
+                            <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                <div class="icon-outer">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-hand-shake"></span>
+                                    </div>
+                                    <div class="feature-number">1</div>
+                                </div>
+                                <div class="lower-content">
+                                    <h3><a href="">Meet Customers</a></h3>
+                                    <div class="text"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feature Block -->
+                        <div class="feature-block col-lg-3 col-md-6 col-sm-12">
+                            <div class="inner-box wow fadeInLeft" data-wow-delay="250ms" data-wow-duration="1500ms">
+                                <div class="icon-outer">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-answer"></span>
+                                    </div>
+                                    <div class="feature-number">2</div>
+                                </div>
+                                <div class="lower-content">
+                                    <h3><a href="">Design Discussion</a></h3>
+                                    <div class="text"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feature Block -->
+                        <div class="feature-block col-lg-3 col-md-6 col-sm-12">
+                            <div class="inner-box wow fadeInLeft" data-wow-delay="500ms" data-wow-duration="1500ms">
+                                <div class="icon-outer">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-sketch"></span>
+                                    </div>
+                                    <div class="feature-number">3</div>
+                                </div>
+                                <div class="lower-content">
+                                    <h3><a href="">Drafting Design</a></h3>
+                                    <div class="text"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Feature Block -->
+                        <div class="feature-block col-lg-3 col-md-6 col-sm-12">
+                            <div class="inner-box wow fadeInLeft" data-wow-delay="750ms" data-wow-duration="1500ms">
+                                <div class="icon-outer">
+                                    <div class="icon-box">
+                                        <span class="icon flaticon-house-1"></span>
+                                    </div>
+                                    <div class="feature-number">4</div>
+                                </div>
+                                <div class="lower-content">
+                                    <h3><a href="">Implimentation</a></h3>
+                                    <div class="text"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+            <!-- End Featured Section -->
+
+            <!-- News Section -->
+            <section class="news-section">
+                <div class="auto-container">
+                    <!-- Sec Title -->
+                    <div class="sec-title">
+                        <h2>Need a design fix? Read our magazine</h2>
+                        <div class="text">Stay updated with latest trends, inspiration, expert tips, DIYs and more</div>
+                    </div>
+
+                    <div class="row clearfix">
+
+                        <!-- News Block -->
+                        <div class="news-block col-lg-4 col-md-6 col-sm-12">
+                            <div class="inner-box wow fadeInRight" data-wow-delay="0ms" data-wow-duration="1500ms">
+                                <div class="image">
+                                    <a href="/FunitureWebsite-war/faces/client/contact.xhtml"><img src="resources/images/resource/news-1.jpg" alt="" /></a>
+                                </div>
+                                <div class="lower-content">
+                                    <ul class="post-meta">
+                                        <li>By <span>Michale</span></li>
+                                        <li>Modular Kitchen</li>
+                                    </ul>
+                                    <h3><a href="/FunitureWebsite-war/faces/client/blogs.xhtml">15 Vastu ideas for the main door emphasizes on every par ...</a></h3>
+                                    <a href="/FunitureWebsite-war/faces/client/blogs.xhtml" class="read-more">Read more <span class="icon flaticon-right-arrow-1"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- News Block -->
+                        <div class="news-block col-lg-4 col-md-6 col-sm-12">
+                            <div class="inner-box wow fadeInRight" data-wow-delay="250ms" data-wow-duration="1500ms">
+                                <div class="image">
+                                    <a href="/FunitureWebsite-war/faces/client/blogs.xhtml"><img src="resources/images/resource/news-2.jpg" alt="" /></a>
+                                </div>
+                                <div class="lower-content">
+                                    <ul class="post-meta">
+                                        <li>By <span>Michale</span></li>
+                                        <li>Interior, awesome</li>
+                                    </ul>
+                                    <h3><a href="/FunitureWebsite-war/faces/client/blogs.xhtml">Storage ideas for the bedroom by interior designers ...</a></h3>
+                                    <a href="/FunitureWebsite-war/faces/client/blogs.xhtml" class="read-more">Read more <span class="icon flaticon-right-arrow-1"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- News Block -->
+                        <div class="news-block col-lg-4 col-md-6 col-sm-12">
+                            <div class="inner-box wow fadeInRight" data-wow-delay="500ms" data-wow-duration="1500ms">
+                                <div class="image">
+                                    <a href="/FunitureWebsite-war/faces/client/blogs.xhtml"><img src="resources/images/resource/news-3.jpg" alt="" /></a>
+                                </div>
+                                <div class="lower-content">
+                                    <ul class="post-meta">
+                                        <li>By <span>Michale</span></li>
+                                        <li>Interior, awesome</li>
+                                    </ul>
+                                    <h3><a href="/FunitureWebsite-war/faces/client/blogs.xhtml">Kids bedroom design ideas by interior designers in NY</a></h3>
+                                    <a href="/FunitureWebsite-war/faces/client/blogs.xhtml" class="read-more">Read more <span class="icon flaticon-right-arrow-1"></span></a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </section>
+            <!-- End News Section -->
+
+            <!-- Call To Action Section -->
+            <section class="call-to-action-section" style="background-image: url(resources/images/background/1.jpg)">
+                <div class="auto-container">
+                    <h2>Think Interior. Think DecorVista</h2>
+                    <div class="text">Interiors for all styles and budgets, Choose from thousands of <br></br> designs. Heart your favorites to shortlist.</div>
+                    <a href="/FunitureWebsite-war/faces/client/contact.xhtml" class="theme-btn btn-style-two"><span class="txt">contact us</span></a>
+                </div>
+            </section>
+            <!-- End Call To Action Section -->
+            <div id="bot">
+                <ui:insert name="bottom">
+                    <ui:include src="footter.xhtml"/>
+                </ui:insert>
+            </div>
+        </div>
+        <!-- End Main Header -->
+    </h:body>
+    <script>
+        $(document).ready(function () {
+            // Initialize Isotope
+            var $grid = $('.items-container').isotope({
+                itemSelector: '.gallery-item',
+                layoutMode: 'fitRows'
+            });
+
+            // Filter items on button click
+            $('.filter-btns').on('click', 'li', function () {
+                var filterValue = $(this).attr('data-filter');
+                $grid.isotope({filter: filterValue});
+                $('.filter').removeClass('active');
+                $(this).addClass('active');
+            });
+        });
+    </script>
+
+    <script src="resources/js/script.js"/>    
+</html>

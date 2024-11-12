@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Decor Vista</title>
+        <style>.hform-commandButton {
+                background-color: #FFA500; /* Button background */
+                color: white; /* Text color */
+                padding: 10px 20px; /* Padding for the button */
+                border: none; /* No border */
+                border-radius: 4px; /* Rounded corners */
+                font-size: 16px; /* Font size */
+                cursor: pointer; /* Pointer cursor on hover */
+                transition: background-color 0.3s ease; /* Smooth transition for hover */
+                display: inline-block; /* Keep button inline */
+                text-align: center; /* Center text */
+                box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Light shadow effect */
+            }
+
+            .hform-commandButton:hover {
+                background-color: #ffc107; /* Darker green on hover */
+            }
+            .rating {
+                display: flex;
+                justify-content: flex-start;
+                cursor: pointer;
+            }
+
+            .rating input {
+                display: none;
+            }
+
+            .rating label {
+                font-size: 25px;
+                color: #ccc;
+                margin-right: 10px;
+                transition: color 0.3s ease;
+            }
+
+            .rating input:checked ~ label {
+                color: #FFA500;
+            }
+
+            .rating label:hover,
+            .rating label:hover ~ label {
+                color: #FFA500;
+            }
+
+            .success {
+                background-color: #d4edda; /* Nền màu xanh nhạt */
+                color: #155724; /* Màu chữ xanh đậm */
+                border: 1px solid #c3e6cb; /* Đường viền xanh nhạt */
+                border-radius: 5px; /* Bo góc */
+                padding: 10px 15px; /* Khoảng cách bên trong */
+                margin: 15px 0; /* Khoảng cách bên ngoài */
+                font-size: 16px; /* Kích thước chữ */
+                display: flex; /* Sử dụng flexbox để căn chỉnh nội dung */
+                align-items: center; /* Căn giữa nội dung theo chiều dọc */
+            }
+
+            .success:before {
+                content: '✅'; /* Thêm biểu tượng thành công */
+                margin-right: 10px; /* Khoảng cách giữa biểu tượng và nội dung */
+                font-size: 20px; /* Kích thước biểu tượng */
+            }
+
+        </style>
+    </h:head>
+    <h:body>
+        <div id="top">
+            <ui:insert name="header">
+                <ui:include src="../header.xhtml"/>
+            </ui:insert>
+        </div> 
+        <section class="page-title" style="background-image:url(../resources/images/background/5.jpg)">
+            <div class="auto-container">
+                <h2>FeedBack Service</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="../home.xhtml">home</a></li>
+                    <li>FeedBack Service</li>
+                </ul>
+            </div>
+        </section>
+        <!-- Contact Form Section -->
+        <section class="contact-form-section" style="background-image:url(../resources/images/background/contact.png)">
+            <div class="auto-container">
+                <!-- Sec Title -->
+                <div class="sec-title">
+                    <h2>Get In Touch</h2>
+                    <div class="text">Feedback Service is here</div>
+                </div>
+                <div class="row clearfix">
+                    <!-- Form Column -->
+                    <div class="form-column col-lg-7 col-md-12 col-sm-12">
+                        <div class="inner-column">
+                            <!-- Contact Form -->
+                            <div class="contact-form">
+                                <h:messages globalOnly="true" styleClass="success" />
+                                <h:form>                               
+                                    <c:if test="#{!loginMB.loggedIn}">
+                                        <h:outputText value="You must be logged in to submit feedback." />
+                                        <h:link outcome="login.xhtml" value="Login here" />
+                                    </c:if>
+                                    <c:if test="#{loginMB.loggedIn}">
+                                        <div class="row clearfix">
+                                            <br></br>
+                                            <div class="rating-box">
+                                                <label for="rating">Rating:</label>
+                                                <div class="rating">
+                                                    <h:selectOneRadio id="rating" value="#{feedbackMB.rating}">
+                                                        <f:selectItem itemValue="1" itemLabel="&#9733;" /> 
+                                                        <f:selectItem itemValue="2" itemLabel="&#9733;&#9733;" /> 
+                                                        <f:selectItem itemValue="3" itemLabel="&#9733;&#9733;&#9733;" /> 
+                                                        <f:selectItem itemValue="4" itemLabel="&#9733;&#9733;&#9733;&#9733;" /> 
+                                                        <f:selectItem itemValue="5" itemLabel="&#9733;&#9733;&#9733;&#9733;&#9733;" />
+                                                    </h:selectOneRadio>
+
+                                                </div>
+                                            </div>
+                                            <br></br>
+                                            <div class="form-group col-lg-6 col-md-6 col-sm-12">
+                                                <label for="comment">Comment:</label>
+                                                <h:inputTextarea id="comment" value="#{feedbackMB.comment}" rows="4" cols="30" required="true" />
+                                            </div>
+
+                                            <!-- Input ẩn cho targetType và targetId -->
+                                            <h:inputHidden id="targetType" value="service" />
+                                            <h:inputHidden id="targetId" value="1" />
+
+
+                                            <div class="form-group col-lg-12 col-md-12 col-sm-12">
+                                                <h:commandButton value="Submit Feedback" action="#{feedbackMB.submitFeedbackForService}" styleClass="hform-commandButton" />
+                                            </div>
+                                        </div>
+                                    </c:if>
+                                </h:form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <div id="bot">
+            <ui:insert name="bottom">
+                <ui:include src="../footter.xhtml"/>
+            </ui:insert>
+        </div>
+
+
+    </h:body>
+</html>

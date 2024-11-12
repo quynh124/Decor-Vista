@@ -1,0 +1,94 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <title>Contact</title>
+
+    </h:head>
+    <h:body>
+        <ui:insert name="header">
+            <ui:include src="../header.xhtml"/>
+        </ui:insert>
+        <section class="page-title" style="background-image:url(../resources/images/background/5.jpg)">
+            <div class="auto-container">
+                <h2>Contact Us</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="../home.xhtml">home</a></li>
+                    <li>Contact Us</li>
+                </ul>
+            </div>
+        </section>
+        <!--End Page Title-->
+
+        <!-- Contact Form Section -->
+        <section class="contact-form-section" style="background-image:url(../resources/images/background/contact.png)">
+            <div class="auto-container">
+                <!-- Sec Title -->
+                <div class="sec-title">
+                    <h2>Get In Touch</h2>
+                    <div class="text">Do you have anything in your mind to let us know?  Contact Us via Phone, Email or Address</div>
+                </div>
+
+                <div class="row clearfix">
+                <div class="info-column col-lg-5 col-md-12 col-sm-12">
+                        <div class="inner-column">
+
+                            <!-- Contact Info List -->
+                            <ul class="contact-info-list">
+                                <li><strong>Address :</strong><br></br>1 Đ. Lý Tự Trọng, An Phú, Ninh Kiều, Cần Thơ</li>
+                            </ul>
+                            <!-- Contact Info List -->
+                            <ul class="contact-info-list">
+                                <li><strong>Phone : </strong><a href="tel:1800-456-7890">1800 456 7890</a></li>
+                                <li><strong>Email : </strong><a href="mailto:info@decorvista.com">info@decorvista.com</a></li>
+                            </ul>
+                            <!-- Contact Info List -->
+                            <ul class="contact-info-list">
+                                <li><strong>Opening Hours :</strong><br></br>8:00 AM – 10:00 PM <br></br> Monday – Sunday</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+       <section class="map-section">
+            <div class="outer-container">
+                <div class="map-outer">
+                    <div class="map-canvas"
+                         data-zoom="12"
+                         data-lat="10.0336437"
+                         data-lng="105.7794105"
+                         data-type="roadmap"
+                         data-hue="#ffc400"
+                         data-title="Decor Vista"
+                         data-icon-path="../resources/images/icons/map-marker.png"
+                         data-content="(1800) 456 7890 &lt;br&gt; Mon-Sat: 7.00an - 9.00pm">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <ui:insert name="bottom">
+            <ui:include src="../footter.xhtml"/>
+        </ui:insert>
+        <script src="../resources/js/jquery.js"></script>
+        <script src="../resources/js/popper.min.js"></script>
+        <script src="../resourcesjs/jquery-ui.js"></script>
+        <script src="../resources/js/bootstrap.min.js"></script>
+        <script src="../resources/js/jquery.fancybox.js"></script>
+        <script src="../resources/js/isotope.js"></script>
+        <script src="../resources/js/owl.js"></script>
+        <script src="../resources/js/wow.js"></script>
+        <script src="../resources/js/validate.js"></script>
+        <script src="../resources/js/appear.js"></script>
+        <script src="../resources/js/scrollbar.js"></script>
+        <script src="../resources/js/script.js"></script>
+        <!--Google Map APi Key-->
+        <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyDXcBVT94nFw0hBAQ8fKSIcIWjKxWzsw"></script>
+        <script src="../resources/js/map-script.js"></script>
+    </h:body>
+</html>

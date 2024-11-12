@@ -1,0 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Project Designer List</title>
+        <style>
+            .card-container {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 16px;
+                justify-content: center;
+                padding: 20px;
+            }
+            .project-card {
+                width: 300px;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                overflow: hidden;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                display: flex;
+                flex-direction: column;
+                text-align: center;
+            }
+            .project-image {
+                width: 100%;
+                height: 200px;
+                object-fit: cover;
+            }
+            .project-info {
+                padding: 15px;
+            }
+            .project-info h3 {
+                margin: 5px 0;
+                font-size: 1.2em;
+            }
+            .project-actions {
+                margin-top: auto;
+                padding: 10px;
+            }
+        </style>
+    </h:head>
+    <h:body>
+        <ui:insert name="header">
+            <ui:include src="header.xhtml" />
+        </ui:insert>
+      
+          <section class="page-title" style="background-image:url(../resources/images/background/5.jpg)">
+            <div class="auto-container">
+                <h2>Inspiration Gallery</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="../home.xhtml">Home</a></li>
+                    <li>Inspiration Gallery</li>
+                </ul>
+            </div>
+        </section>
+        <div class="auto-container">
+            <h:form id="projectListForm">
+                <div class="card-container">
+                    <ui:repeat var="project" value="#{projectDesignerMB.showAllProjectDesigner()}">
+                        <div class="project-card">
+                           <h:graphicImage value="../resources/images/designer/project/#{project.image}" alt="Project Image" class="project-image" />
+                            <div class="project-info">
+                                <h3>#{project.projectName}</h3>
+                                <p><strong>Designer:</strong> #{project.designerID.firstName}</p>
+                            </div>
+                            <div class="project-actions">
+                                <p:commandButton value="View Details" 
+                                                 action="#{projectDesignerMB.viewProjectDetails1(project)}"
+                                                 styleClass="ui-button-secondary" />
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </h:form>
+        </div>
+         <ui:insert name="bottom">
+        <ui:include src="footer.xhtml"/>
+    </ui:insert>
+    </h:body>
+</html>

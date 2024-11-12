@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Decor Vista - View Profile</title>
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+        <h:outputStylesheet name="css/profile.css" />
+    </h:head>
+
+    <h:body>
+        <!-- Include Header -->
+        <ui:insert name="header">
+            <ui:include src="header.xhtml"/>
+        </ui:insert>
+
+
+        <!-- View Profile Information -->
+        <div class="container bootstrap snippets bootdey">
+            <div class="row">
+                <!-- Profile Navigation -->
+                <div class="profile-nav col-md-3">
+                    <div class="panel">
+                        <div class="user-heading round">
+                            <h:graphicImage value="../resources/images/designer/#{designerMB.designer.image}" alt="Profile Image"/>
+                            <h1>#{designerMB.firstName} #{designerMB.lastName}</h1>
+                            <p>#{designerMB.phone}</p>
+                        </div>
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="profile.xhtml"> <i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="editprofile.xhtml"> <i class="fa fa-calendar"></i> Edit Profile</a></li>
+                            <li><a href="projectdesigner.xhtml"> <i class="fa fa-edit"></i> Project Designer</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Display Profile Information -->
+                <div class="profile-info col-md-9">
+                    <div class="panel">
+                        <div class="bio-graph-heading">
+                            Welcome, #{designerMB.firstName}. Here is your profile information.
+                        </div>
+                        <div class="panel-body bio-graph-info">
+                            <h1>Profile Information</h1>
+                            <div class="row">
+                                <div class="bio-row">
+                                    <p><span>First Name </span>: #{designerMB.firstName}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>Last Name </span>: #{designerMB.lastName}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>Phone </span>: #{designerMB.phone}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>Address </span>: #{designerMB.address}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>Image </span>:
+                                        <h:graphicImage value="../resources/images/designer/#{designerMB.designer.image}" alt="Profile Image"/>                            </p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>User Name </span>: #{designerMB.username}</p>
+                                </div>
+                                <div class="bio-row">
+                                    <p><span>Password </span>: #{designerMB.password != null ? '••••••••' : ''}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <h:form id="consultationsForm">
+                        <p:dataTable id="consultationsTable" value="#{consultationsMB.showAllConsultationss()}" var="consultations"
+                                     paginator="true" rows="5" styleClass="table table-striped"
+                                     rowsPerPageTemplate="5,10,15">
+                            <p:column headerText="DesignerID">
+                                <h:outputText value="#{consultations.designerID.lastName}" />
+                            </p:column>
+                            <p:column headerText="Email Customer">
+                                <h:outputText value="#{consultations.userID.email}" />
+                            </p:column>
+                            <p:column headerText="Scheduled DateTime">
+                                <h:outputText value="#{consultations.scheduleddatetime}">
+                                    <f:convertDateTime pattern="yyyy-MM-dd"/>
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Scheduled DateTime">
+                                <h:outputText value="#{consultations.scheduleddatetime}">
+                                    <f:convertDateTime pattern="HH:mm" timeZone="GMT+7"  />
+                                </h:outputText>
+                            </p:column>
+                            <p:column headerText="Notes">
+                                <h:outputText value="#{consultations.notes}" />
+                            </p:column>
+                            <p:column headerText="Status">
+                                <h:outputText value="#{consultations.status}" />
+                            </p:column>
+                            <p:column headerText="Action">
+                                <h:commandButton value="Delete" action="#{consultationsMB.deleteConsultations(consultations.consultationID)}" />
+
+                            </p:column>
+                        </p:dataTable>
+                    </h:form>
+                </div></div></div>
+
+        <script>
+            // JavaScript function to draw clock icons on all visible canvases
+            function drawClockIcons() {
+                const canvasList = document.querySelectorAll('[id^="clockCanvas"]');
+
+                canvasList.forEach(canvas => {
+                    const ctx = canvas.getContext('2d');
+                    const img = new Image();
+                    img.src = '../resources/images/icons/clock.png';
+
+                    img.onload = function () {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear canvas before redrawing
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    };
+                });
+            }
+
+            // Initial call on page load
+            window.onload = drawClockIcons;
+        </script>
+
+        <style>
+            .bio-desk {
+                background-color: #f9f9f9;
+                border: 1px solid #ddd;
+                border-radius: 8px;
+                padding: 15px;
+                width: 100%;
+            }
+
+            .bio-desk h4 {
+                margin-bottom: 15px;
+            }
+
+            .bio-desk .form-group {
+                margin-bottom: 10px;
+            }
+
+            .bio-desk .form-label {
+                font-weight: bold;
+                color: #333;
+            }
+
+            .bio-desk p {
+                margin: 0;
+            }
+        </style>
+        <ui:insert name="bottom">
+            <ui:include src="footer.xhtml"/>
+        </ui:insert>
+    </h:body>
+</html>

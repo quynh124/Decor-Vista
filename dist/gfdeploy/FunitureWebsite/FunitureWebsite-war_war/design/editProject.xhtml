@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Edit Project</title>
+        <h:outputStylesheet name="css/profile.css" />
+
+    </h:head>
+    <h:body>
+        <ui:insert name="header">
+            <ui:include src="header.xhtml"/>
+        </ui:insert>
+        <section class="page-title" style="background-image:url(../resources/images/background/5.jpg)">
+            <div class="auto-container">
+                <h2>Edit Project</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="../home.xhtml">Home</a></li>
+                    <li><a href="designerProjects.xhtml">Designer Projects</a></li>
+                    <li>Edit Project</li>
+                </ul>
+            </div>
+        </section>
+
+        <div class="container bootstrap snippets bootdey">
+            <div class="row">
+                <div class="profile-nav col-md-3">
+                    <div class="panel">
+                        <div class="user-heading round">
+                            <a href="#">
+                                <h:graphicImage value="../resources/images/designer/#{projectDesignerMB.loggedInDesigner.image}" width="100px"/>
+                            </a>
+                            <h1>#{projectDesignerMB.loggedInDesigner.firstName} #{projectDesignerMB.loggedInDesigner.lastName}</h1>
+                            <p>#{projectDesignerMB.loggedInDesigner.phone}</p>
+                        </div>
+
+                        <ul class="nav nav-pills nav-stacked">
+                            <li><a href="profile.xhtml"> <i class="fa fa-user"></i> Profile</a></li>
+                            <li><a href="editprofile.xhtml"> <i class="fa fa-edit"></i> Edit Profile</a></li>
+                            <li><a href="designerProjects.xhtml"> <i class="fa fa-briefcase"></i> My Projects</a></li>
+                            <li class="active"><a href="editProject.xhtml"> <i class="fa fa-edit"></i> Edit Project</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="profile-info col-md-9">
+                    <div class="panel">
+                        <div class="panel-body bio-graph-info">
+                            <h1>Edit Project</h1>
+                            <div class="row">
+<!--                                <form>-->
+                                <h:form enctype="multipart/form-data" id="editProForm"><!--
+                                    <h:messages globalOnly="true" />-->
+                                    <div class="form-group">
+                                        <span>Designer ID</span>:
+                                        <h:inputText id="designerID" value="#{projectDesignerMB.designerID}" required="false" styleClass="form-control"/>
+                                        <h:message for="designerID" styleClass="text-danger" />
+                                    </div>
+                                    <div class="form-group">
+                                        <span>Project Name</span>:
+                                        <h:inputText id="projectName" value="#{projectDesignerMB.projectDesigner.projectName}" required="true" styleClass="form-control"/>
+                                        <h:message for="projectName" styleClass="text-danger" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span>Description</span>:
+                                        <h:inputText id="description" value="#{projectDesignerMB.projectDesigner.description}" required="true"  styleClass="form-control"/>
+                                        <h:message for="description" styleClass="text-danger" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <span>Image</span>:
+                                        <h:inputText id="image" value="#{projectDesignerMB.projectDesigner.image}" required="false" styleClass="form-control"/>
+                                        <h:message for="image" styleClass="text-danger" />
+                                    </div>
+
+                                    <div class="form-group">
+                                        <h:commandButton value="Save" action="#{projectDesignerMB.editPro()}" styleClass="btn btn-success"/>
+                                        <h:commandButton value="Cancel" action="projectdesigner.xhtml?faces-redirect=true" styleClass="btn btn-default" immediate="true"/>
+                                    </div>
+                                </h:form>
+                            </div>
+                        </div> 
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <ui:insert name="bottom">
+            <ui:include src="footer.xhtml"/>
+        </ui:insert>
+    </h:body>
+</html>
+

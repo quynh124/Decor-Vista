@@ -1,0 +1,150 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    
+    <h:head>
+        <title>Decor Vista</title>
+        <h:outputStylesheet name="styles.css" />
+        <script type="text/javascript">
+            function showBookDialog() {
+                document.getElementById('bookDialog').style.display = 'block';
+            }
+            function hideBookDialog() {
+                document.getElementById('bookDialog').style.display = 'none';
+            }
+        </script>
+    </h:head>
+    
+    <h:body>
+
+        <ui:insert name="header">
+            <ui:include src="../header.xhtml" />
+        </ui:insert>
+
+        <section class="page-title" style="background-image:url(../resources/images/background/5.jpg)">
+            <div class="auto-container">
+                <h2>Designer Details</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="./listdesigner.xhtml">Designer</a></li>
+                    <li>Designer Details</li>
+                </ul>
+            </div>
+        </section>
+
+        <section class="shop-single-section">
+            <div class="auto-container">
+                <div class="shop-single">
+                    <div class="product-details">
+                        <h:form>
+                             <f:event type="preRenderView" listener="#{designerMB.loadSelectedDesigner}" />
+
+                            <!--Basic Details-->
+                            <div class="basic-details">
+                                <div class="row clearfix">
+                                    <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                                        <figure class="image-box">
+                                            <h:graphicImage value="../resources/images/designer/#{designerMB.selectedDesigner.image}" alt="Designer Image" styleClass="lightbox-image" />
+                                        </figure>
+                                    </div>
+                                    <div class="info-column col-lg-6 col-md-12 col-sm-12">
+                                        <div class="inner-column">
+                                            <h4>
+                                                <h:outputText value="#{designerMB.selectedDesigner.firstName} #{designerMB.selectedDesigner.lastName}" />
+                                            </h4>
+
+                                            <div class="price">Phone: <span><h:outputText value="#{designerMB.selectedDesigner.phone}" /></span></div>
+                                            <div class="price">Address: <span><h:outputText value="#{designerMB.selectedDesigner.address}" /></span></div>
+                                            <div class="price">Experience: <span><h:outputText value="#{designerMB.selectedDesigner.experience}" /> years</span></div>
+
+                                            <!-- Trigger modal to book consultation -->
+                                            <h:commandButton value="Book Consultations" onclick="showBookDialog(); return false;" styleClass="book-button" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:form>
+                    </div>
+                </div>
+            </div>
+        </section>
+ <div class="message-box">
+        <h:messages globalOnly="true" styleClass="error" />
+    </div>
+        <!-- Modal Dialog for booking consultation -->
+        <div id="bookDialog" style="display:none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4);">
+            <div style="background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 500px;">
+                <h2>Book a Consultation</h2>
+                <h:form id="consultationForm">
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputLabel for="consultationDate" value="Date:" />
+                        <h:inputText id="consultationDate" value="#{consultationsMB.consultations.day}">
+                            <f:convertDateTime pattern="dd/MM/yyyy" />
+                        </h:inputText>
+
+                        <h:outputLabel for="consultationTime" value="Scheduled Time:" />
+                        <h:inputText id="consultationTime" value="#{consultationsMB.consultations.scheduleddatetime}" />
+
+                        <h:outputLabel for="notes" value="Notes:" />
+                        <h:inputTextarea id="notes" value="#{consultationsMB.consultations.notes}" rows="5" cols="30" />
+                        
+                        <!-- Hidden input for designerID -->
+                       <h:inputHidden value="#{consultationsMB.consultations.designerID}" />
+
+                    </h:panelGrid>
+
+                    <h:commandButton value="Submit" action="#{consultationsMB.createConsultation}" onclick="hideBookDialog();" />
+                    <h:commandButton value="Cancel" onclick="hideBookDialog(); return false;" />
+                </h:form>
+            </div>
+        </div>
+
+        <section class="news-section">
+            <div class="auto-container">
+                <!-- Sec Title -->
+                <div class="sec-title">
+                    <h2>Project Of Designer</h2>
+                </div>
+
+                <div class="row clearfix">
+                    <ui:repeat value="#{projectDesignerMB.projectList1}" var="item">
+                        <div class="news-block col-lg-4 col-md-6 col-sm-12">
+                            <div class="inner-box wow fadeInRight">
+                                <div class="image">
+                                    <h:graphicImage value="../resources/images/designer/project/#{item.image}" style="width: 100%; height: auto;" />
+                                </div>
+                                <div class="lower-content">
+                                    <ul class="post-meta">
+                                        <li> <h:outputText value="#{item.projectName}" /></li>
+                                        <li> <h:outputText value="#{item.description}" /></li>
+                                    </ul>
+                                    <h3><h:outputText value="#{item.projectName}" /></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </ui:repeat>
+                </div>
+            </div>
+        </section>
+
+        <ui:insert name="bottom">
+            <ui:include src="../footter.xhtml"/>
+        </ui:insert>
+        <script type="text/javascript">
+        function scrollToMessages() {
+            var messageBox = document.querySelector('.message-box');
+            if (messageBox) {
+                messageBox.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+        window.onload = scrollToMessages;
+    </script>
+        <script src="../resources/js/jquery.js"></script>
+        <script src="../resources/js/popper.min.js"></script>
+        <script src="../resources/js/bootstrap.min.js"></script>
+
+    </h:body>
+</html>

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+    <h:head>
+        <title>Decor Vista - Designer Projects</title>
+        <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>
+        <h:outputStylesheet name="css/profile.css" />
+    </h:head>
+
+    <h:body>
+
+        <ui:insert name="header">
+            <ui:include src="header.xhtml"/>
+        </ui:insert>
+<section class="services-section-two">
+    <div class="auto-container">
+        <div class="sec-title">
+            <h2>Feedback from Clients</h2>
+        </div>
+        <div class="row clearfix">
+            <ui:repeat value="#{feedbackdesMB.getFeedbackByLoggedInDesigner()}" var="item">
+                <div class="service-block-two col-lg-4 col-md-6 col-sm-12">
+                    <div class="inner-box wow fadeInLeft" data-wow-delay="0ms" data-wow-duration="1500ms">
+                        <div class="content">
+                            <div class="text">
+                                <b>Your Name: <h:outputText value="#{item.userID.userName}" /></b>
+                            </div>
+                            <div class="text">
+                                <b>Designer Name: <h:outputText value="#{item.designerID.username}" /></b>
+                            </div>
+                            <div class="text">
+                                Comment: <h:outputText value="#{item.content}" />
+                            </div>
+                            <div class="text">
+                                Rating: <h:outputText value="#{item.rating}" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ui:repeat>
+        </div>
+    </div>
+</section>
+
+
+        <ui:insert name="bottom">
+            <ui:include src="footer.xhtml"/>
+        </ui:insert>
+
+        <script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    </h:body>
+</html>

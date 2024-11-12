@@ -1,0 +1,203 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+    <h:head>
+        <title>Decor Vista Admin</title>
+
+        <style>
+            /* Center and style the form container */
+            #formSuppliers {
+                max-width: 900px;
+                margin: 20px auto;
+                padding: 20px;
+                border: 1px solid #ddd;
+                border-radius: 5px;
+                background-color: #f9f9f9;
+            }
+
+            /* Label styling */
+            #formSuppliers h\\:outputLabel {
+                font-weight: 600;
+                color: #333;
+                margin-bottom: 5px;
+                display: inline-block;
+            }
+
+            /* Input fields styling */
+            #formSuppliers h\\:inputText {
+                width: 100%;
+                padding: 8px;
+                margin-bottom: 10px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                box-sizing: border-box;
+            }
+
+            /* Error messages in red */
+            #formSuppliers h\\:message {
+                color: red;
+                font-size: 12px;
+                margin-bottom: 10px;
+                display: inline-block;
+            }
+
+            /* Button styling */
+            #formSuppliers h\\:panelGroup {
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            #formSuppliers h\\:commandButton {
+                padding: 8px 16px;
+                margin: 5px;
+                border: none;
+                border-radius: 4px;
+                font-weight: bold;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            /* Add and Reset button colors */
+            #formSuppliers h\\:commandButton[value="Add"] {
+                background-color: #28a745;
+            }
+
+            #formSuppliers h\\:commandButton[value="Reset"] {
+                background-color: #dc3545;
+            }
+
+            /* Button hover effect */
+            #formSuppliers h\\:commandButton:hover {
+                opacity: 0.9;
+            }
+            .success {
+                background-color: #d4edda; /* Nền màu xanh nhạt */
+                color: #155724; /* Màu chữ xanh đậm */
+                border: 1px solid #c3e6cb; /* Đường viền xanh nhạt */
+                border-radius: 5px; /* Bo góc */
+                padding: 10px 15px; /* Khoảng cách bên trong */
+                margin: 15px 0; /* Khoảng cách bên ngoài */
+                font-size: 16px; /* Kích thước chữ */
+                display: flex; /* Sử dụng flexbox để căn chỉnh nội dung */
+                align-items: center; /* Căn giữa nội dung theo chiều dọc */
+            }
+
+            .success:before {
+                content: '✅'; /* Thêm biểu tượng thành công */
+                margin-right: 10px; /* Khoảng cách giữa biểu tượng và nội dung */
+                font-size: 20px; /* Kích thước biểu tượng */
+            }
+        </style>
+    </h:head>
+    <h:body class="sb-nav-fixed">
+        <div id="top">
+            <ui:insert name="header">
+                <ui:include src="header.xhtml"/>
+            </ui:insert>
+        </div>
+        <div id="layoutSidenav">
+            <div id="layoutSidenav_content">
+                <main>
+                    <div class="container-fluid px-4">
+                        <h1 class="mt-4">Suppliers Management</h1>
+                        <ol class="breadcrumb mb-4">
+                            <li class="breadcrumb-item active">Suppliers Management</li>
+                        </ol>
+                        <h:form id="formSuppliers">
+                            <h4>Add Suppliers</h4>
+                            <h:panelGrid columns="1" cellpadding="5">
+                                   <h6 style="color: green;">The ID is generated automatically. Please enter a number between 1 and 5 to generate the ID.</h6>
+                                 <h:outputLabel for="supplierID" value="Supplier ID"/>
+                                <h:inputText id="supplierID" value="#{supplierMB.suppliers.supplierID}" style="width: 800px;height: 40px"/>
+                                <h:message for="supplierID"/>
+                                <h:outputLabel for="supplierName" value="Supplier Name"/>
+                                <h:inputText id="supplierName" value="#{supplierMB.suppliers.supplierName}" style="width: 800px;height: 40px"/>
+                                <h:message for="supplierName"/>
+                                <h:outputLabel for="email" value="Email"/>
+                                <h:inputText id="email" value="#{supplierMB.suppliers.email}" style="width: 800px;height: 40px"/>
+                                <h:message for="email"/>
+                                <h:outputLabel for="phone" value="Phone"/>
+                                <h:inputText id="phone" value="#{supplierMB.suppliers.phone}" style="width: 800px;height: 40px"/>
+                                <h:message for="phone"/>
+                                <h:outputLabel for="url" value="Link Website"/>
+                                <h:inputText id="url" value="#{supplierMB.suppliers.url}" style="width: 800px;height: 40px"/>
+                                <h:message for="url"/>
+                                <h:panelGroup>
+                                    <h:commandButton action="#{supplierMB.addSuppliers()}" value="Add" type="submit" style="width: 60px"/>
+                                    <h:commandButton action="#{supplierMB.updateSuppliers()}" value="Update" type="submit" style="width: 60px"/>
+                                    <h:commandButton action="#{supplierMB.resetForm()}" value="Reset" type="submit" style="width: 60px"/>
+                                </h:panelGroup>
+                            </h:panelGrid>
+                        </h:form>
+                        <h:messages globalOnly="true" styleClass="success" />
+                        <div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table me-1"></i>
+                                Suppliers Table
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple" class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Supplier ID</th>
+                                            <th>Supplier Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Link Website</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Supplier ID</th>
+                                            <th>Supplier Name</th>
+                                            <th>Email</th>
+                                            <th>Phone</th>
+                                            <th>Link Website</th>
+                                            <th>Update</th>
+                                            <th>Delete</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <c:forEach items="#{supplierMB.showAllSuppliers()}" var="item1">
+                                            <tr>
+                                                <td><h:outputText value="#{item1.supplierID}" /></td>
+                                                <td><h:outputText value="#{item1.supplierName}" /></td>
+                                                <td><h:outputText value="#{item1.email}" /></td>
+                                                <td><h:outputText value="#{item1.phone}" /></td>
+                                                <td><h:outputText value="#{item1.url}" /></td>
+                                                <td>
+                                                    <h:form>
+                                                        <h:commandButton image="resources/image/e.png" action="#{supplierMB.findSupplierbyID(item1.supplierID)}" style="width: 30px" type="submit" />
+                                                    </h:form>
+                                                </td>
+                                                <td>
+                                                    <h:form>
+                                                        <h:commandButton image="resources/image/delete.png" action="#{supplierMB.deleteSuppliers(item1.supplierID)}" style="width: 30px" type="submit"  onclick="return confirm('Are you sure you want to delete this supplier?');" />
+                                                    </h:form>
+                                                </td>
+                                            </tr>
+                                        </c:forEach>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <h:outputScript target="body">
+            var alertMessage = "#{flash.alertMessage}";
+            if (alertMessage) {
+            alert(alertMessage);
+            }
+        </h:outputScript>
+        <script src="resources/js/scripts.js"/>
+        <script src="resources/js/datatablesSimple.js"/>
+    </h:body>
+</html>

@@ -1,0 +1,334 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Decor Vista</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"/>
+        <style>
+            .quantity-input {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                margin: 20px 0;
+            }
+            .qty-text {
+                height: 46px;
+                width: 50px;
+                text-align: center;
+                border: 1px solid #ccc;
+                font-size: 14px;
+                border-radius: 5px;
+            }
+            .qty-btn {
+                background-color: #dfb162;
+                color: #fff;
+                border: none;
+                padding: 5px 10px;
+                cursor: pointer;
+                border-radius: 5px;
+                font-size: 16px;
+                margin: 0 5px;
+                transition: background-color 0.3s ease;
+            }
+            .qty-btn:hover {
+                background-color: #ffe8a1;
+            }
+            .primary-btn {
+                background-color: #dfb162;
+                color: white;
+                padding: 10px 20px;
+                border: none;
+                border-radius: 5px;
+                text-decoration: none;
+                transition: background-color 0.3s ease;
+                margin-left: 10px;
+            }
+            .primary-btn:hover {
+                background-color: #FFA500;
+            }
+            .heart__btn {
+                display: inline-flex;
+                justify-content: center;
+                align-items: center;
+                width: 50px;
+                height: 50px;
+                border: 2px solid #FFA500;
+                border-radius: 10px;
+                background-color: white;
+                font-size: 24px;
+                margin-left: 10px;
+                transition: color 0.3s ease;
+                text-decoration: none;
+            }
+            .heart__btn i {
+                color: #FFA500;
+            }
+            .heart__btn:hover {
+                border-color: #c82333;
+            }
+            .heart__btn:hover i {
+                color: #c82333;
+            }
+
+
+            .rating {
+                display: flex;
+                justify-content: flex-start;
+                cursor: pointer;
+            }
+
+            .rating input {
+                display: none;
+            }
+
+            .rating label {
+                font-size: 25px;
+                color: #ccc;
+                margin-right: 10px;
+                transition: color 0.3s ease;
+            }
+
+            .rating input:checked ~ label {
+                color: #FFA500;
+            }
+
+            .rating label:hover,
+            .rating label:hover ~ label {
+                color: #FFA500;
+            }
+
+            .success {
+                background-color: #d4edda; /* Nền màu xanh nhạt */
+                color: #155724; /* Màu chữ xanh đậm */
+                border: 1px solid #c3e6cb; /* Đường viền xanh nhạt */
+                border-radius: 5px; /* Bo góc */
+                padding: 10px 15px; /* Khoảng cách bên trong */
+                margin: 15px 0; /* Khoảng cách bên ngoài */
+                font-size: 16px; /* Kích thước chữ */
+                display: flex; /* Sử dụng flexbox để căn chỉnh nội dung */
+                align-items: center; /* Căn giữa nội dung theo chiều dọc */
+            }
+
+            .success:before {
+                content: '✅'; /* Thêm biểu tượng thành công */
+                margin-right: 10px; /* Khoảng cách giữa biểu tượng và nội dung */
+                font-size: 20px; /* Kích thước biểu tượng */
+            }
+
+
+
+        </style>
+    </h:head>
+
+    <h:body>
+        <ui:insert name="header">
+            <ui:include src="../header.xhtml"/>
+        </ui:insert>
+
+        <section class="page-title" style="background-image:url(../resources/images/background/5.jpg)">
+            <div class="auto-container">
+                <h2>Product Details</h2>
+                <ul class="page-breadcrumb">
+                    <li><a href="./shop.xhtml">shop</a></li>
+                    <li>Product Details</li>
+                </ul>
+            </div>
+        </section>
+
+        <h:form>
+            <!--Shop Single Section-->
+            <section class="shop-single-section">
+                <div class="auto-container">
+                    <div class="shop-single">
+                        <div class="product-details">
+                            <f:event type="preRenderView" listener="#{productsMB.loadSelectedProduct}" />
+
+
+                            <!--Basic Details-->
+                            <div class="basic-details">
+                                <div class="row clearfix">
+                                    <div class="image-column col-lg-6 col-md-12 col-sm-12">
+                                        <figure class="image-box">
+                                            <h:graphicImage value="../admin/resources/image/products/#{productsMB.selectedProduct.image}" alt="" styleClass="lightbox-image" />
+                                        </figure>
+                                    </div>
+                                    <div class="info-column col-lg-6 col-md-12 col-sm-12">
+                                        <div class="inner-column">
+                                            <h4><h:outputText value="#{productsMB.selectedProduct.productName}"/></h4>
+
+                                            <div class="text"><h:outputText value="#{productsMB.selectedProduct.description}"/></div>
+                                            <div class="price">Price : <span><h:outputText value="#{productsMB.selectedProduct.unitPrice}"/> VND</span></div>
+                                            <div class="price">Size : <span><h:outputText value="#{productsMB.selectedProduct.size}"/></span></div>
+                                            <div class="price">Color : <span><h:outputText value="#{productsMB.selectedProduct.color}"/></span></div>
+                                            <div class="price">
+                                                Supplier: 
+                                                <span>
+                                                    <h:outputLink value="#{productsMB.selectedProduct.supplierID.url}">
+                                                        <h:outputText value="#{productsMB.selectedProduct.supplierID.supplierName}"/>
+                                                    </h:outputLink>
+                                                </span>
+                                            </div>
+                                            <h:form>
+                                                <div class="other-options clearfix">
+                                                    <div class="item-quantity">
+                                                        <label class="field-label">Quantity:</label>
+                                                        <button type="button" class="qty-btn" onclick="changeQuantity(-1)">-</button>                                               
+                                                        <h:inputText value="#{cartProcessMB.quantity}" id="quantity-input"  styleClass="qty-text" />
+                                                        <button type="button" class="qty-btn" onclick="changeQuantity(+1)">+</button>
+                                                    </div>
+                                                   
+                                                    <!-- Pass quantity as a parameter -->
+                                                    <h:commandButton action="#{cartProcessMB.addCart1}" value="ADD TO CART" class="theme-btn cart-btn">
+                                                        <f:param name="quantityInput" value="#{cartProcessMB.quantity}" />
+                                                    </h:commandButton>
+                                                </div>
+                                            </h:form>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!--Product Info Tabs-->
+                            <div class="product-info-tabs">
+                                <!--Product Tabs-->
+                                <div class="prod-tabs tabs-box">
+                                    <!--Tab Btns-->
+                                    <ul class="tab-btns tab-buttons clearfix">
+                                        <li data-tab="#prod-details" class="tab-btn active-btn">Description</li>
+                                        <li data-tab="#prod-spec" class="tab-btn">Specification</li>
+                                        <li data-tab="#prod-reviews" class="tab-btn">Review (2)</li>
+                                    </ul>
+
+                                    <!--Tabs Container-->
+                                    <div class="tabs-content">
+                                        <!--Tab / Active Tab-->
+                                        <div class="tab active-tab" id="prod-details">
+                                            <div class="content">
+                                                <h:outputText value="#{productsMB.selectedProduct.description}"/>
+                                            </div>
+                                        </div>
+
+                                        <!--Tab-->
+                                        <div class="tab" id="prod-spec">
+                                            <div class="content">
+                                                <p>Furniture products offer a perfect blend of aesthetics and functionality, elevating your living space. With sophisticated designs and high-quality materials, these pieces not only provide comfort and convenience but also reflect your unique style and personality. From chairs, tables, and beds to cabinets and shelves, every detail is meticulously crafted to ensure durability and safety during use. Whether your preference is modern, classic, or minimalist, furniture is designed to meet all customer needs, creating an ideal and elegant living environment.</p>
+                                            </div>
+                                        </div>
+
+                                        <!--Tab-->
+                                        <!--Tab-->
+                                        <div class="tab" id="prod-reviews">
+                                            <h2 class="title">2 Reviews For win Your Friends</h2>
+                                            <h:form>
+
+                                                <f:event type="preRenderView" listener="#{feedbackMB.loadFeedbackForProduct}" />
+                                                <h:panelGroup>
+                                                    <ui:repeat value="#{feedbackMB.feedbackList}" var="feedback">
+                                                        <div class="comments-area">
+                                                            <div class="comment-box reply-comment">
+                                                                <div class="comment">
+                                                                    <div class="author-thumb">
+                                                                        <img src="../resources/images/resource/author-2.jpg" alt=""/>
+                                                                    </div>
+                                                                    <div class="comment-inner">
+                                                                        <div class="comment-info clearfix">#{feedback.userID.fullName}</div>
+                                                                        <div class="rating">
+                                                                            <span class="fa fa-star" style="color: #{feedback.rating >= 1 ? 'gold' : 'gray'};"></span>
+                                                                            <span class="fa fa-star" style="color: #{feedback.rating >= 2 ? 'gold' : 'gray'};"></span>
+                                                                            <span class="fa fa-star" style="color: #{feedback.rating >= 3 ? 'gold' : 'gray'};"></span>
+                                                                            <span class="fa fa-star" style="color: #{feedback.rating >= 4 ? 'gold' : 'gray'};"></span>
+                                                                            <span class="fa fa-star" style="color: #{feedback.rating >= 5 ? 'gold' : 'gray'};"></span>
+                                                                            <span>(#{feedback.rating} Star#{feedback.rating > 1 ? 's' : ''})</span>
+                                                                        </div>
+                                                                        <div class="text">#{feedback.comment}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </ui:repeat>
+                                                    <h:outputText rendered="#{empty feedbackMB.feedbackList}" value="No feedback available." />
+                                                </h:panelGroup>
+
+                                            </h:form>
+                                            <c:if test="#{!loginMB.loggedIn}">
+                                                <h:outputText value="You must be logged in to submit feedback." />
+                                                <h:link outcome="login.xhtml" value="Login here" />
+                                            </c:if>
+                                            <c:if test="#{loginMB.loggedIn}">
+                                                <div class="shop-comment-form">    
+                                                    <h2>Add Your Review</h2>
+                                                    <div class="rating-box">
+                                                        <div class="text">Your Rating:</div>
+                                                        <div class="rating">
+                                                            <h:selectOneRadio id="rating" value="#{feedbackMB.rating}">
+                                                                <f:selectItem itemValue="1" itemLabel="&#9733;" /> 
+                                                                <f:selectItem itemValue="2" itemLabel="&#9733;&#9733;" /> 
+                                                                <f:selectItem itemValue="3" itemLabel="&#9733;&#9733;&#9733;" /> 
+                                                                <f:selectItem itemValue="4" itemLabel="&#9733;&#9733;&#9733;&#9733;" /> 
+                                                                <f:selectItem itemValue="5" itemLabel="&#9733;&#9733;&#9733;&#9733;&#9733;" />
+                                                            </h:selectOneRadio>
+                                                        </div>
+                                                    </div>
+                                                    <h:messages globalOnly="true" styleClass="success" />
+                                                    <div class="row clearfix">
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                                            <h:outputLabel for="comment" value="Your Comments*" />
+                                                            <h:inputTextarea id="comment" value="#{feedbackMB.comment}" required="true" />
+                                                        </div>
+                                                        <h:inputHidden id="targetType" value="product" />                                                  
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                                            <h:outputLabel for="rating" value="Your Rating*" />
+
+                                                        </div>
+
+                                                        <div class="col-lg-12 col-md-12 col-sm-12 form-group">
+                                                            <h:commandButton value="Submit Feedback" action="#{feedbackMB.submitFeedbackForProduct()}" styleClass="theme-btn btn-style-four">
+                                                                <f:setPropertyActionListener target="#{feedbackMB.targetId}" value="#{productsMB.selectedProduct.productID}" />
+                                                            </h:commandButton>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </c:if>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </h:form>
+
+        <ui:insert name="bottom">
+            <ui:include src="../footter.xhtml"/>
+        </ui:insert>
+
+        <script>
+            $(document).ready(function () {
+                $('.tab-btn').click(function () {
+                    var tab_id = $(this).attr('data-tab');
+
+                    $('.tab-btn').removeClass('active-btn');
+                    $('.tab').removeClass('active-tab');
+
+                    $(this).addClass('active-btn');
+                    $(tab_id).addClass('active-tab');
+                });
+            });
+        </script>
+
+        <script type="text/javascript">
+
+
+        </script>
+
+
+    </h:body>
+</html>
